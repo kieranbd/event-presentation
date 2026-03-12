@@ -17,450 +17,307 @@
       --cream: #F2F0E9;
       --charcoal: #1A1A1A;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       background: var(--cream);
       color: var(--charcoal);
       font-family: "Outfit", sans-serif;
       overflow: hidden;
-      width: 100vw;
-      height: 100vh;
+      width: 100vw; height: 100vh;
       -webkit-font-smoothing: antialiased;
       cursor: pointer;
     }
-
-    /* Noise overlay */
     body::before {
       content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.04;
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 9999; opacity: 0.04;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* Font classes */
-    .font-heading { font-family: "Plus Jakarta Sans", sans-serif; }
-    .font-subheading { font-family: "Outfit", sans-serif; }
-    .font-drama { font-family: "Cormorant Garamond", serif; font-style: italic; }
-    .font-mono { font-family: "IBM Plex Mono", monospace; }
-
-    /* ==================== SLIDE SYSTEM ==================== */
-    .slide-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-    }
-
+    /* ==================== SLIDES ==================== */
+    .slide-container { position: relative; width: 100vw; height: 100vh; }
     .slide {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      opacity: 0;
-      transform: translateX(60px);
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      opacity: 0; transform: translateX(60px);
       pointer-events: none;
-      transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                  transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: opacity 0.5s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
     }
+    .slide.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+    .slide.exit-left { opacity: 0; transform: translateX(-60px); }
 
-    .slide.active {
-      opacity: 1;
-      transform: translateX(0);
-      pointer-events: auto;
-    }
-
-    .slide.exit-left {
-      opacity: 0;
-      transform: translateX(-60px);
-    }
-
-    /* ==================== BRANDING BAR ==================== */
+    /* ==================== BRAND BAR ==================== */
     .brand-bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 48px;
-      z-index: 10;
+      position: absolute; top: 0; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 48px; z-index: 10;
     }
-
-    .brand-bar img {
-      height: 28px;
-      opacity: 0.7;
-    }
-
+    .brand-bar img { height: 28px; opacity: 0.7; }
     .brand-bar .url {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--moss);
-      opacity: 0.4;
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--moss); opacity: 0.35;
     }
+    .brand-bar.dark img { opacity: 0.8; }
+    .brand-bar.dark .url { color: var(--cream); opacity: 0.3; }
 
     /* ==================== DOT NAV ==================== */
     .dot-nav {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      z-index: 100;
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 10px; z-index: 100;
     }
-
     .dot-nav .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--moss);
-      opacity: 0.15;
-      transition: all 0.3s ease;
-      cursor: pointer;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--moss); opacity: 0.15;
+      transition: all 0.3s ease; cursor: pointer;
     }
+    .dot-nav .dot.active { opacity: 0.6; background: var(--clay); transform: scale(1.3); }
 
-    .dot-nav .dot.active {
-      opacity: 0.6;
-      background: var(--clay);
-      transform: scale(1.3);
+    /* ==================== ANIMATIONS ==================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    /* ==================== SLIDE 1 — TITLE ==================== */
-    .title-slide {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      padding: 0 80px;
-    }
-
-    .title-left {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .title-right {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .title-right .logo-tall {
-      height: 220px;
-      margin-bottom: 16px;
-    }
-
-    .title-right .tagline {
-      font-family: "Outfit", sans-serif;
-      font-size: 22px;
-      color: var(--moss);
-      opacity: 0.7;
-      margin-top: 4px;
-    }
-
-    .title-footer {
-      position: absolute;
-      bottom: 48px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-family: "Outfit", sans-serif;
-      font-size: 15px;
-      color: var(--moss);
-      opacity: 0.5;
-    }
-
-    .title-footer a {
-      color: var(--clay);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    /* ==================== NETWORK GRAPHIC (SVG + CSS) ==================== */
-    .network-graphic {
-      width: 480px;
-      height: 420px;
-      position: relative;
-    }
-
-    .network-graphic svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    /* Node pulse */
-    @keyframes nodePulse {
-      0%, 100% { opacity: 0.6; r: 4; }
-      50% { opacity: 1; r: 6; }
-    }
-
-    .node-pulse { animation: nodePulse 2.5s ease-in-out infinite; }
-    .node-pulse-delay1 { animation: nodePulse 2.5s ease-in-out infinite 0.5s; }
-    .node-pulse-delay2 { animation: nodePulse 2.5s ease-in-out infinite 1s; }
-    .node-pulse-delay3 { animation: nodePulse 2.5s ease-in-out infinite 1.5s; }
-
-    /* Line dash animation */
-    @keyframes dashFlow {
-      0% { stroke-dashoffset: 200; }
-      100% { stroke-dashoffset: 0; }
-    }
-
-    .dash-animate {
-      stroke-dasharray: 6 4;
-      animation: dashFlow 4s linear infinite;
-    }
-
-    .dash-animate-reverse {
-      stroke-dasharray: 6 4;
-      animation: dashFlow 4s linear infinite reverse;
-    }
-
-    /* Cube float */
-    @keyframes cubeFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .cube-float { animation: cubeFloat 3s ease-in-out infinite; }
-    .cube-float-delay { animation: cubeFloat 3s ease-in-out infinite 1s; }
-    .cube-float-delay2 { animation: cubeFloat 3.5s ease-in-out infinite 0.5s; }
-
-    /* Glow pulse on large nodes */
-    @keyframes glowPulse {
-      0%, 100% { filter: drop-shadow(0 0 2px rgba(204,88,51,0.2)); }
+    @keyframes float1 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes float2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+    @keyframes float3 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes dashMove { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -20; } }
+    @keyframes nodeGlow {
+      0%,100% { filter: drop-shadow(0 0 2px rgba(204,88,51,0)); }
       50% { filter: drop-shadow(0 0 8px rgba(204,88,51,0.5)); }
     }
+    @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @keyframes travelDot {
+      0% { left: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { left: calc(100% - 4px); opacity: 0; }
+    }
 
-    .glow-pulse { animation: glowPulse 3s ease-in-out infinite; }
+    .float-1 { animation: float1 4s ease-in-out infinite; }
+    .float-2 { animation: float2 3.5s ease-in-out infinite 0.8s; }
+    .float-3 { animation: float3 4.5s ease-in-out infinite 1.2s; }
+    .float-4 { animation: float1 3.8s ease-in-out infinite 0.4s; }
+    .float-5 { animation: float2 4.2s ease-in-out infinite 1.6s; }
+    .float-6 { animation: float3 3.6s ease-in-out infinite 0.6s; }
+    .float-7 { animation: float1 4.4s ease-in-out infinite 1.0s; }
+    .dash-flow { stroke-dasharray: 5 5; animation: dashMove 2s linear infinite; }
+    .dash-flow-slow { stroke-dasharray: 8 6; animation: dashMove 3s linear infinite; }
+    .dash-flow-rev { stroke-dasharray: 5 5; animation: dashMove 2.5s linear infinite reverse; }
+    .node-glow { animation: nodeGlow 3s ease-in-out infinite; }
+    .pulse-n { animation: pulse 2.5s ease-in-out infinite; }
+    .pulse-n1 { animation: pulse 2.5s ease-in-out infinite 0.6s; }
+    .pulse-n2 { animation: pulse 2.5s ease-in-out infinite 1.2s; }
+    .pulse-n3 { animation: pulse 2.5s ease-in-out infinite 1.8s; }
+
+    /* Title entrance */
+    .title-enter { opacity: 0; transform: translateY(20px); }
+    .slide.active .title-enter { animation: fadeUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) forwards; }
+    .slide.active .title-enter.d1 { animation-delay: 0.1s; }
+    .slide.active .title-enter.d2 { animation-delay: 0.3s; }
+    .slide.active .title-enter.d3 { animation-delay: 0.5s; }
+    .slide.active .title-enter.d4 { animation-delay: 0.7s; }
+
+    /* ==================== SLIDE 1: TITLE ==================== */
+    .title-slide {
+      display: flex; align-items: center; justify-content: center;
+      height: 100vh; padding: 0 80px; gap: 60px;
+    }
+    .title-left { flex: 1; display: flex; align-items: center; justify-content: center; }
+    .title-right { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .title-right .logo-tall { height: 220px; margin-bottom: 16px; }
+    .title-right .tagline { font-size: 22px; color: var(--moss); opacity: 0.65; }
+    .title-footer {
+      position: absolute; bottom: 52px; left: 0; right: 0; text-align: center;
+      font-size: 15px; color: var(--moss); opacity: 0.5;
+    }
+    .title-footer a { color: var(--clay); text-decoration: none; font-weight: 600; }
+
+    .network-scene { width: 500px; height: 500px; position: relative; }
+    .network-scene canvas { width: 100%; height: 100%; }
+
+    /* ==================== SLIDE 2: SPEAKERS (dark) ==================== */
+    .speakers-slide {
+      height: 100vh;
+      background: var(--moss);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 60px 80px;
+      text-align: center;
+    }
+    .speakers-slide h1 {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-weight: 800; font-size: 48px;
+      color: var(--cream); line-height: 1.25;
+      max-width: 700px; margin-bottom: 60px;
+    }
+    .speakers-slide h1 .highlight { color: var(--clay); }
+    .speakers-row { display: flex; gap: 100px; align-items: center; margin-bottom: 50px; }
+    .speaker { display: flex; flex-direction: column; align-items: center; }
+    .speaker-photo {
+      width: 180px; height: 180px; border-radius: 50%;
+      object-fit: cover; margin-bottom: 16px;
+      border: 3px solid rgba(242,240,233,0.1);
+    }
+    .speaker-name {
+      font-family: "Outfit", sans-serif;
+      font-size: 18px; color: var(--cream); opacity: 0.8;
+    }
+    .speakers-logo { height: 40px; opacity: 0.6; }
 
     /* ==================== FLOW SLIDES ==================== */
     .flow-slide {
       height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 100px 80px 80px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 100px 60px 80px;
     }
-
-    .flow-slide .slide-heading {
-      font-family: "Plus Jakarta Sans", sans-serif;
-      font-weight: 800;
-      font-size: 44px;
-      color: var(--moss);
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    .flow-slide .slide-subtitle {
+    .slide-subtitle {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 12px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--clay);
-      font-weight: 600;
-      margin-bottom: 60px;
-      text-align: center;
-    }
-
-    /* Flow diagram */
-    .flow-diagram {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 0;
-      width: 100%;
-      max-width: 1100px;
-    }
-
-    .flow-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      flex: 1;
-      max-width: 220px;
+      font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--clay); font-weight: 600; margin-bottom: 16px;
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .slide-heading {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-weight: 800; font-size: 46px; color: var(--moss);
+      margin-bottom: 64px; text-align: center;
+      opacity: 0;
+    }
+    .slide.active .slide-subtitle { animation: fadeUp 0.5s ease forwards 0.1s; }
+    .slide.active .slide-heading { animation: fadeUp 0.5s ease forwards 0.2s; }
+
+    .flow-diagram {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; max-width: 1000px;
     }
 
-    .slide.active .flow-step {
-      opacity: 1;
-      transform: translateY(0);
+    .flow-node {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      opacity: 0; transform: translateY(24px);
+    }
+    .flow-connector {
+      display: flex; align-items: center; padding: 0 8px;
+      padding-bottom: 50px;
+      opacity: 0; transform: translateY(16px);
     }
 
-    .slide.active .flow-step:nth-child(1) { transition-delay: 0.15s; }
-    .slide.active .flow-step:nth-child(2) { transition-delay: 0.3s; }  /* includes arrow */
-    .slide.active .flow-step:nth-child(3) { transition-delay: 0.45s; }
-    .slide.active .flow-step:nth-child(4) { transition-delay: 0.6s; }
-    .slide.active .flow-step:nth-child(5) { transition-delay: 0.75s; }
-    .slide.active .flow-step:nth-child(6) { transition-delay: 0.9s; }
-    .slide.active .flow-step:nth-child(7) { transition-delay: 1.05s; }
+    /* Sequential L-R: nodes at child 1,3,5,7 — connectors at 2,4,6 */
+    .slide.active .flow-diagram > :nth-child(1) { animation: fadeUp 0.5s ease forwards 0.4s; }
+    .slide.active .flow-diagram > :nth-child(2) { animation: fadeUp 0.4s ease forwards 0.85s; }
+    .slide.active .flow-diagram > :nth-child(3) { animation: fadeUp 0.5s ease forwards 1.2s; }
+    .slide.active .flow-diagram > :nth-child(4) { animation: fadeUp 0.4s ease forwards 1.65s; }
+    .slide.active .flow-diagram > :nth-child(5) { animation: fadeUp 0.5s ease forwards 2.0s; }
+    .slide.active .flow-diagram > :nth-child(6) { animation: fadeUp 0.4s ease forwards 2.45s; }
+    .slide.active .flow-diagram > :nth-child(7) { animation: fadeUp 0.5s ease forwards 2.8s; }
 
-    .step-number {
+    .node-step {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--clay);
-      opacity: 0.5;
-      margin-bottom: 12px;
-      letter-spacing: 0.1em;
+      font-size: 10px; font-weight: 700; color: var(--clay);
+      opacity: 0.5; margin-bottom: 12px; letter-spacing: 0.1em;
     }
-
-    .step-icon-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 16px;
-      min-height: 72px;
+    .node-icon {
+      width: 80px; height: 80px; border-radius: 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 34px; margin-bottom: 18px;
+      transition: transform 0.3s ease;
     }
-
-    .step-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      flex-shrink: 0;
+    .node-icon:hover { transform: scale(1.05); }
+    .node-icon.agent-icon {
+      background: var(--moss);
+      box-shadow: 0 6px 24px rgba(46,64,54,0.2);
     }
-
-    .step-icon.agent {
-      background: linear-gradient(135deg, var(--moss), #3d5a4a);
-      color: var(--cream);
-      box-shadow: 0 4px 20px rgba(46, 64, 54, 0.25);
+    .node-icon.agent-icon svg {
+      width: 36px; height: 36px; stroke: var(--cream); fill: none;
+      stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
     }
-
-    .step-icon.agent svg {
-      width: 32px;
-      height: 32px;
-      stroke: var(--cream);
-      fill: none;
-      stroke-width: 1.8;
-    }
-
-    .step-icon.action {
-      background: rgba(204, 88, 51, 0.08);
-      border: 1.5px solid rgba(204, 88, 51, 0.2);
-    }
-
-    .step-icon.service {
+    .node-icon.action-icon {
       background: white;
-      border: 1.5px solid rgba(46, 64, 54, 0.1);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      padding: 12px;
+      border: 1.5px solid rgba(46,64,54,0.08);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .node-icon.service-icon {
+      background: white;
+      border: 1.5px solid rgba(46,64,54,0.08);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .node-icon.success-icon {
+      background: rgba(34,197,94,0.06);
+      border: 1.5px solid rgba(34,197,94,0.15);
+    }
+    .node-label {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-weight: 700; font-size: 15px; color: var(--moss); margin-bottom: 4px;
+    }
+    .node-desc {
+      font-family: "Outfit", sans-serif;
+      font-size: 13px; color: var(--moss); opacity: 0.45;
+      line-height: 1.4; max-width: 150px;
     }
 
-    .step-icon.service img {
-      width: 100%;
-      height: 100%;
+    .connector-line {
+      width: 80px; height: 2px; position: relative; overflow: visible;
+    }
+    .connector-line::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, rgba(204,88,51,0.15), rgba(204,88,51,0.3), rgba(204,88,51,0.15));
+      border-radius: 1px;
+    }
+    .connector-line::after {
+      content: ""; position: absolute; right: -4px; top: -3px;
+      width: 0; height: 0;
+      border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+      border-left: 6px solid rgba(204,88,51,0.35);
+    }
+    .connector-line .travel-dot {
+      position: absolute; top: -2px; left: 0;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--clay); opacity: 0;
+    }
+    .slide.active .connector-line .travel-dot { animation: travelDot 2s ease-in-out infinite 1.5s; }
+    .service-logo-img { width: 40px; height: 40px; }
+
+    /* ==================== IMAGE SLIDE ==================== */
+    .image-slide {
+      height: 100vh;
+      background: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px;
+    }
+    .image-slide img {
+      max-width: 100%; max-height: 100%;
       object-fit: contain;
     }
 
-    .step-icon.success {
-      background: rgba(34, 197, 94, 0.08);
-      border: 1.5px solid rgba(34, 197, 94, 0.2);
-      color: #16a34a;
+    /* ==================== ADOPTION SLIDE ==================== */
+    .adoption-slide {
+      height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 60px 80px; gap: 60px;
     }
-
-    .step-label {
+    .adoption-left {
+      flex: 0 0 40%; display: flex; flex-direction: column; justify-content: center;
+    }
+    .adoption-left .slide-subtitle { margin-bottom: 20px; }
+    .adoption-left h2 {
       font-family: "Plus Jakarta Sans", sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--moss);
-      margin-bottom: 4px;
+      font-weight: 800; font-size: 52px; color: var(--moss);
+      line-height: 1.15; margin-bottom: 20px;
     }
-
-    .step-desc {
-      font-family: "Outfit", sans-serif;
-      font-size: 13px;
-      color: var(--moss);
-      opacity: 0.55;
-      line-height: 1.4;
-      max-width: 170px;
+    .adoption-left h2 .highlight { color: var(--clay); }
+    .adoption-left p {
+      font-size: 18px; color: var(--moss); opacity: 0.55; line-height: 1.6;
+      max-width: 400px;
     }
-
-    /* Arrow connector */
-    .flow-arrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 28px;
-      min-width: 48px;
-      flex-shrink: 0;
-      opacity: 0;
-      transition: opacity 0.4s ease;
+    .adoption-right {
+      flex: 1; display: flex; align-items: center; justify-content: center;
     }
-
-    .slide.active .flow-arrow {
-      opacity: 1;
+    .adoption-right img {
+      max-height: calc(100vh - 140px); width: auto; max-width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(46,64,54,0.08);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.06);
     }
-
-    .flow-arrow svg {
-      width: 40px;
-      height: 20px;
-    }
-
-    .flow-arrow .arrow-line {
-      stroke: var(--clay);
-      stroke-width: 2;
-      stroke-dasharray: 4 3;
-      fill: none;
-    }
-
-    .flow-arrow .arrow-head {
-      fill: var(--clay);
-    }
-
-    @keyframes arrowDash {
-      0% { stroke-dashoffset: 0; }
-      100% { stroke-dashoffset: -14; }
-    }
-
-    .slide.active .flow-arrow .arrow-line {
-      animation: arrowDash 1s linear infinite;
-    }
-
-    /* ==================== ENTRANCE ANIMATIONS ==================== */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .slide.active .animate-in {
-      animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    }
-
-    .slide.active .animate-in.delay-1 { animation-delay: 0.1s; opacity: 0; }
-    .slide.active .animate-in.delay-2 { animation-delay: 0.2s; opacity: 0; }
-    .slide.active .animate-in.delay-3 { animation-delay: 0.3s; opacity: 0; }
-
-    /* Title slide specific entrance */
-    .slide.active .title-enter {
-      animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    }
-
-    .slide.active .title-enter.delay-1 { animation-delay: 0.2s; opacity: 0; }
-    .slide.active .title-enter.delay-2 { animation-delay: 0.4s; opacity: 0; }
-    .slide.active .title-enter.delay-3 { animation-delay: 0.6s; opacity: 0; }
-
-    /* Service logo SVGs inline - keeping them crisp */
-    .service-logo { width: 36px; height: 36px; }
   </style>
 </head>
 <body>
@@ -470,588 +327,285 @@
     <!-- ==================== SLIDE 1: TITLE ==================== -->
     <div class="slide active" data-slide="0">
       <div class="title-slide">
-        <div class="title-left title-enter delay-1">
-          <div class="network-graphic">
-            <svg viewBox="0 0 480 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Grid lines (subtle) -->
-              <line x1="60" y1="350" x2="240" y2="250" stroke="#2E4036" stroke-width="0.5" opacity="0.12"/>
-              <line x1="240" y1="250" x2="420" y2="350" stroke="#2E4036" stroke-width="0.5" opacity="0.12"/>
-              <line x1="60" y1="280" x2="240" y2="180" stroke="#2E4036" stroke-width="0.5" opacity="0.12"/>
-              <line x1="240" y1="180" x2="420" y2="280" stroke="#2E4036" stroke-width="0.5" opacity="0.12"/>
-              <line x1="60" y1="210" x2="240" y2="110" stroke="#2E4036" stroke-width="0.5" opacity="0.12"/>
-              <line x1="240" y1="110" x2="420" y2="210" stroke="#2E4036" stroke-width="0.5" opacity="0.12"/>
-
-              <!-- Animated connection lines -->
-              <path d="M120,300 Q180,260 240,240" stroke="#CC5833" stroke-width="1.2" opacity="0.4" class="dash-animate"/>
-              <path d="M240,240 Q300,220 360,260" stroke="#2E4036" stroke-width="1.2" opacity="0.3" class="dash-animate-reverse"/>
-              <path d="M180,320 Q220,280 280,260" stroke="#CC5833" stroke-width="1" opacity="0.3" class="dash-animate"/>
-              <path d="M160,220 Q200,190 240,180" stroke="#2E4036" stroke-width="1" opacity="0.25" class="dash-animate-reverse"/>
-              <path d="M240,180 Q280,170 320,200" stroke="#CC5833" stroke-width="1" opacity="0.3" class="dash-animate"/>
-              <path d="M200,160 Q240,130 280,150" stroke="#2E4036" stroke-width="1" opacity="0.2" class="dash-animate"/>
-              <path d="M140,260 Q190,230 240,210" stroke="#CC5833" stroke-width="0.8" opacity="0.25" class="dash-animate-reverse"/>
-              <path d="M300,180 Q340,210 370,240" stroke="#2E4036" stroke-width="0.8" opacity="0.2" class="dash-animate"/>
-
-              <!-- Vertical connection lines -->
-              <path d="M200,300 L200,200" stroke="#2E4036" stroke-width="0.8" opacity="0.15" class="dash-animate"/>
-              <path d="M280,280 L280,180" stroke="#CC5833" stroke-width="0.8" opacity="0.2" class="dash-animate-reverse"/>
-              <path d="M240,320 L240,140" stroke="#2E4036" stroke-width="0.8" opacity="0.15" class="dash-animate"/>
-              <path d="M320,300 L320,220" stroke="#CC5833" stroke-width="0.6" opacity="0.15" class="dash-animate"/>
-              <path d="M160,280 L160,200" stroke="#2E4036" stroke-width="0.6" opacity="0.12" class="dash-animate-reverse"/>
-
-              <!-- Isometric cubes - Layer 1 (bottom) -->
-              <g class="cube-float" transform="translate(200, 280)">
-                <polygon points="0,-20 30,-5 30,25 0,10" fill="#2E4036" opacity="0.7"/>
-                <polygon points="0,-20 -30,-5 -30,25 0,10" fill="#2E4036" opacity="0.5"/>
-                <polygon points="0,-20 30,-5 0,10 -30,-5" fill="#3d5a4a" opacity="0.9"/>
-              </g>
-
-              <g class="cube-float-delay" transform="translate(280, 260)">
-                <polygon points="0,-20 30,-5 30,25 0,10" fill="#CC5833" opacity="0.7"/>
-                <polygon points="0,-20 -30,-5 -30,25 0,10" fill="#CC5833" opacity="0.5"/>
-                <polygon points="0,-20 30,-5 0,10 -30,-5" fill="#e07050" opacity="0.9"/>
-              </g>
-
-              <g class="cube-float-delay2" transform="translate(160, 260)">
-                <polygon points="0,-15 22,-4 22,18 0,7" fill="#2E4036" opacity="0.6"/>
-                <polygon points="0,-15 -22,-4 -22,18 0,7" fill="#2E4036" opacity="0.4"/>
-                <polygon points="0,-15 22,-4 0,7 -22,-4" fill="#4a6b56" opacity="0.8"/>
-              </g>
-
-              <!-- Layer 2 (middle) -->
-              <g class="cube-float-delay" transform="translate(240, 210)">
-                <polygon points="0,-24 36,-7 36,29 0,12" fill="#2E4036" opacity="0.8"/>
-                <polygon points="0,-24 -36,-7 -36,29 0,12" fill="#2E4036" opacity="0.55"/>
-                <polygon points="0,-24 36,-7 0,12 -36,-7" fill="#4a6b56" opacity="0.95"/>
-                <!-- Highlight edge -->
-                <line x1="0" y1="-24" x2="0" y2="12" stroke="#CC5833" stroke-width="1" opacity="0.6"/>
-              </g>
-
-              <g class="cube-float" transform="translate(320, 230)">
-                <polygon points="0,-16 24,-5 24,19 0,8" fill="#CC5833" opacity="0.6"/>
-                <polygon points="0,-16 -24,-5 -24,19 0,8" fill="#CC5833" opacity="0.4"/>
-                <polygon points="0,-16 24,-5 0,8 -24,-5" fill="#d4734e" opacity="0.8"/>
-              </g>
-
-              <g class="cube-float-delay2" transform="translate(180, 220)">
-                <polygon points="0,-14 21,-4 21,18 0,8" fill="#2E4036" opacity="0.5"/>
-                <polygon points="0,-14 -21,-4 -21,18 0,8" fill="#2E4036" opacity="0.35"/>
-                <polygon points="0,-14 21,-4 0,8 -21,-4" fill="#3d5a4a" opacity="0.7"/>
-              </g>
-
-              <!-- Layer 3 (top) -->
-              <g class="cube-float-delay" transform="translate(220, 160)">
-                <polygon points="0,-18 27,-5 27,22 0,9" fill="#CC5833" opacity="0.65"/>
-                <polygon points="0,-18 -27,-5 -27,22 0,9" fill="#CC5833" opacity="0.45"/>
-                <polygon points="0,-18 27,-5 0,9 -27,-5" fill="#e07050" opacity="0.85"/>
-              </g>
-
-              <g class="cube-float" transform="translate(270, 170)">
-                <polygon points="0,-12 18,-3 18,15 0,6" fill="#2E4036" opacity="0.5"/>
-                <polygon points="0,-12 -18,-3 -18,15 0,6" fill="#2E4036" opacity="0.35"/>
-                <polygon points="0,-12 18,-3 0,6 -18,-3" fill="#4a6b56" opacity="0.7"/>
-              </g>
-
-              <!-- Pulsing nodes at intersections -->
-              <circle cx="240" cy="240" r="5" fill="#CC5833" class="node-pulse glow-pulse"/>
-              <circle cx="200" cy="260" r="4" fill="#2E4036" class="node-pulse-delay1"/>
-              <circle cx="280" cy="250" r="4" fill="#CC5833" class="node-pulse-delay2"/>
-              <circle cx="160" cy="270" r="3" fill="#2E4036" class="node-pulse-delay3"/>
-              <circle cx="320" cy="260" r="3" fill="#CC5833" class="node-pulse-delay1"/>
-              <circle cx="240" cy="180" r="4" fill="#2E4036" class="node-pulse-delay2"/>
-              <circle cx="200" cy="200" r="3" fill="#CC5833" class="node-pulse-delay3"/>
-              <circle cx="280" cy="190" r="3" fill="#2E4036" class="node-pulse"/>
-              <circle cx="240" cy="140" r="3" fill="#CC5833" class="node-pulse-delay1"/>
-              <circle cx="180" cy="230" r="2.5" fill="#2E4036" class="node-pulse-delay2"/>
-              <circle cx="300" cy="220" r="2.5" fill="#CC5833" class="node-pulse-delay3"/>
-              <circle cx="140" cy="290" r="2" fill="#2E4036" class="node-pulse"/>
-              <circle cx="340" cy="280" r="2" fill="#CC5833" class="node-pulse-delay2"/>
-
-              <!-- Small decorative dots scattered -->
-              <circle cx="100" cy="310" r="1.5" fill="#2E4036" opacity="0.2"/>
-              <circle cx="380" cy="300" r="1.5" fill="#CC5833" opacity="0.2"/>
-              <circle cx="130" cy="240" r="1.5" fill="#CC5833" opacity="0.15"/>
-              <circle cx="350" cy="230" r="1.5" fill="#2E4036" opacity="0.15"/>
-              <circle cx="200" cy="140" r="1.5" fill="#2E4036" opacity="0.15"/>
-              <circle cx="300" cy="150" r="1.5" fill="#CC5833" opacity="0.15"/>
-            </svg>
+        <div class="title-left title-enter d1">
+          <div class="network-scene">
+            <canvas id="networkCanvas" width="1000" height="1000"></canvas>
           </div>
         </div>
         <div class="title-right">
-          <img src="public/kwanda-brand/kwanda logo tall dark.png" alt="Kwanda" class="logo-tall title-enter delay-2">
-          <div class="tagline title-enter delay-3">Your AI transformation partner</div>
+          <img src="public/kwanda-brand/kwanda logo tall dark.png" alt="Kwanda" class="logo-tall title-enter d2">
+          <div class="tagline title-enter d3">Your AI transformation partner</div>
         </div>
       </div>
-      <div class="title-footer title-enter delay-3">
+      <div class="title-footer title-enter d4">
         <a href="https://kwanda.ai">kwanda.ai</a> &nbsp;// &nbsp;An Ubundi-backed company
       </div>
     </div>
 
-    <!-- ==================== SLIDE 2: Xero Invoicing ==================== -->
+    <!-- ==================== SLIDE 2: SPEAKERS (dark) ==================== -->
     <div class="slide" data-slide="1">
-      <div class="brand-bar">
-        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
-        <span class="url">kwanda.ai</span>
-      </div>
-      <div class="flow-slide">
-        <div class="slide-subtitle animate-in delay-1">Demo 1 — Xero Integration</div>
-        <h2 class="slide-heading animate-in delay-2">Automated Financial Data Sync</h2>
-        <div class="flow-diagram">
-          <!-- Step 1 -->
-          <div class="flow-step">
-            <div class="step-number">01</div>
-            <div class="step-icon-row">
-              <div class="step-icon action">👤</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon agent">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                  <path d="M9 12h6"/>
-                  <path d="M12 9v6"/>
-                  <circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/>
-                  <path d="M5 18a7 7 0 0 1 14 0"/>
-                  <path d="M3.5 14.5l2 2 2-2"/>
-                  <path d="M18.5 14.5l2 2 2-2"/>
-                </svg>
-              </div>
-            </div>
-            <div class="step-label">Instruction</div>
-            <div class="step-desc">"Create invoice for [Client]"</div>
+      <div class="speakers-slide">
+        <h1 class="title-enter d1">How AI can work for you: a practical introduction to <span class="highlight">agentic AI</span>.</h1>
+        <div class="speakers-row title-enter d2">
+          <div class="speaker">
+            <img src="public/images/Chris.jpeg" alt="Chris Immelman" class="speaker-photo">
+            <div class="speaker-name">Chris Immelman</div>
           </div>
-
-          <div class="flow-arrow flow-step"><svg viewBox="0 0 40 20"><line x1="0" y1="10" x2="32" y2="10" class="arrow-line"/><polygon points="32,5 40,10 32,15" class="arrow-head"/></svg></div>
-
-          <!-- Step 2 -->
-          <div class="flow-step">
-            <div class="step-number">02</div>
-            <div class="step-icon-row">
-              <div class="step-icon agent">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                  <path d="M9 12h6"/><path d="M12 9v6"/>
-                  <circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/>
-                  <path d="M5 18a7 7 0 0 1 14 0"/>
-                  <path d="M3.5 14.5l2 2 2-2"/><path d="M18.5 14.5l2 2 2-2"/>
-                </svg>
-              </div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">🔍</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon service">
-                <!-- Xero logo -->
-                <svg viewBox="0 0 40 40" class="service-logo">
-                  <circle cx="20" cy="20" r="18" fill="#13B5EA"/>
-                  <text x="20" y="26" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="18">X</text>
-                </svg>
-              </div>
-            </div>
-            <div class="step-label">Contact Lookup</div>
-            <div class="step-desc">Search Xero contacts</div>
+          <div class="speaker">
+            <img src="public/images/Kieran.png" alt="Kieran Donnelly" class="speaker-photo">
+            <div class="speaker-name">Kieran Donnelly</div>
           </div>
-
-          <div class="flow-arrow flow-step"><svg viewBox="0 0 40 20"><line x1="0" y1="10" x2="32" y2="10" class="arrow-line"/><polygon points="32,5 40,10 32,15" class="arrow-head"/></svg></div>
-
-          <!-- Step 3 -->
-          <div class="flow-step">
-            <div class="step-number">03</div>
-            <div class="step-icon-row">
-              <div class="step-icon agent">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                  <path d="M9 12h6"/><path d="M12 9v6"/>
-                  <circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/>
-                  <path d="M5 18a7 7 0 0 1 14 0"/>
-                  <path d="M3.5 14.5l2 2 2-2"/><path d="M18.5 14.5l2 2 2-2"/>
-                </svg>
-              </div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">📄</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon service">
-                <svg viewBox="0 0 40 40" class="service-logo">
-                  <circle cx="20" cy="20" r="18" fill="#13B5EA"/>
-                  <text x="20" y="26" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="18">X</text>
-                </svg>
-              </div>
-            </div>
-            <div class="step-label">Drafting</div>
-            <div class="step-desc">Generate invoice in Xero</div>
-          </div>
-
-          <div class="flow-arrow flow-step"><svg viewBox="0 0 40 20"><line x1="0" y1="10" x2="32" y2="10" class="arrow-line"/><polygon points="32,5 40,10 32,15" class="arrow-head"/></svg></div>
-
-          <!-- Step 4 -->
-          <div class="flow-step">
-            <div class="step-number">04</div>
-            <div class="step-icon-row">
-              <div class="step-icon success" style="font-size: 28px;">✅</div>
-            </div>
-            <div class="step-label">Complete</div>
-            <div class="step-desc">Invoice synced &amp; ready</div>
-          </div>
+        </div>
+        <img src="public/kwanda-brand/kwanda logo full light.png" alt="Kwanda" class="speakers-logo title-enter d3">
+        <div class="title-enter d4" style="position:absolute;bottom:52px;left:0;right:0;text-align:center;font-size:15px;color:var(--cream);opacity:0.4;">
+          <a href="https://kwanda.ai" style="color:var(--clay);text-decoration:none;font-weight:600;">kwanda.ai</a> &nbsp;// &nbsp;An Ubundi-backed company
         </div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 3: CRM Management ==================== -->
+    <!-- ==================== SLIDE 3: DEMOS HEADER ==================== -->
     <div class="slide" data-slide="2">
       <div class="brand-bar">
         <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
         <span class="url">kwanda.ai</span>
       </div>
-      <div class="flow-slide">
-        <div class="slide-subtitle animate-in delay-1">Demo 2 — CRM Automation</div>
-        <h2 class="slide-heading animate-in delay-2">Intelligent Lead Pipeline Management</h2>
-        <div class="flow-diagram">
-          <!-- Step 1 -->
-          <div class="flow-step">
-            <div class="step-number">01</div>
-            <div class="step-icon-row">
-              <div class="step-icon action">📥</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon agent">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                  <path d="M9 12h6"/><path d="M12 9v6"/>
-                  <circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/>
-                  <path d="M5 18a7 7 0 0 1 14 0"/>
-                  <path d="M3.5 14.5l2 2 2-2"/><path d="M18.5 14.5l2 2 2-2"/>
-                </svg>
-              </div>
-            </div>
-            <div class="step-label">Inbound</div>
-            <div class="step-desc">Lead detected from email</div>
-          </div>
-
-          <div class="flow-arrow flow-step"><svg viewBox="0 0 40 20"><line x1="0" y1="10" x2="32" y2="10" class="arrow-line"/><polygon points="32,5 40,10 32,15" class="arrow-head"/></svg></div>
-
-          <!-- Step 2 -->
-          <div class="flow-step">
-            <div class="step-number">02</div>
-            <div class="step-icon-row">
-              <div class="step-icon agent">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                  <path d="M9 12h6"/><path d="M12 9v6"/>
-                  <circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/>
-                  <path d="M5 18a7 7 0 0 1 14 0"/>
-                  <path d="M3.5 14.5l2 2 2-2"/><path d="M18.5 14.5l2 2 2-2"/>
-                </svg>
-              </div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">🧠</div>
-            </div>
-            <div class="step-label">Extraction</div>
-            <div class="step-desc">Parse name, company &amp; budget</div>
-          </div>
-
-          <div class="flow-arrow flow-step"><svg viewBox="0 0 40 20"><line x1="0" y1="10" x2="32" y2="10" class="arrow-line"/><polygon points="32,5 40,10 32,15" class="arrow-head"/></svg></div>
-
-          <!-- Step 3 -->
-          <div class="flow-step">
-            <div class="step-number">03</div>
-            <div class="step-icon-row">
-              <div class="step-icon agent">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                  <path d="M9 12h6"/><path d="M12 9v6"/>
-                  <circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/>
-                  <path d="M5 18a7 7 0 0 1 14 0"/>
-                  <path d="M3.5 14.5l2 2 2-2"/><path d="M18.5 14.5l2 2 2-2"/>
-                </svg>
-              </div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">📊</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon service">
-                <!-- Google Sheets -->
-                <svg viewBox="0 0 40 40" class="service-logo">
-                  <rect x="8" y="4" width="24" height="32" rx="2" fill="#0F9D58"/>
-                  <rect x="12" y="12" width="16" height="16" rx="1" fill="white"/>
-                  <line x1="20" y1="12" x2="20" y2="28" stroke="#0F9D58" stroke-width="1"/>
-                  <line x1="12" y1="18" x2="28" y2="18" stroke="#0F9D58" stroke-width="1"/>
-                  <line x1="12" y1="23" x2="28" y2="23" stroke="#0F9D58" stroke-width="1"/>
-                </svg>
-              </div>
-            </div>
-            <div class="step-label">Database Update</div>
-            <div class="step-desc">Write to Google Sheets</div>
-          </div>
-
-          <div class="flow-arrow flow-step"><svg viewBox="0 0 40 20"><line x1="0" y1="10" x2="32" y2="10" class="arrow-line"/><polygon points="32,5 40,10 32,15" class="arrow-head"/></svg></div>
-
-          <!-- Step 4 -->
-          <div class="flow-step">
-            <div class="step-number">04</div>
-            <div class="step-icon-row">
-              <div class="step-icon agent">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                  <path d="M9 12h6"/><path d="M12 9v6"/>
-                  <circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/>
-                  <path d="M5 18a7 7 0 0 1 14 0"/>
-                  <path d="M3.5 14.5l2 2 2-2"/><path d="M18.5 14.5l2 2 2-2"/>
-                </svg>
-              </div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">💬</div>
-            </div>
-            <div class="step-label">Confirmation</div>
-            <div class="step-desc">Notify via Slack / Telegram</div>
-          </div>
-        </div>
+      <div style="height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px;">
+        <div class="slide-subtitle title-enter d1" style="opacity:0;margin-bottom:16px;">Live Demos</div>
+        <h2 class="title-enter d2" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:72px;color:var(--moss);margin-bottom:24px;opacity:0;">Demos</h2>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 4: SOW & Document Gen ==================== -->
+    <!-- ==================== SLIDE 4: LOGOS IMAGE ==================== -->
     <div class="slide" data-slide="3">
       <div class="brand-bar">
         <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
         <span class="url">kwanda.ai</span>
       </div>
-      <div class="flow-slide">
-        <div class="slide-subtitle animate-in delay-1">Demo 3 — Document Generation</div>
-        <h2 class="slide-heading animate-in delay-2">Instant Legal Document Creation</h2>
-        <div class="flow-diagram">
-          <!-- Step 1 -->
-          <div class="flow-step">
-            <div class="step-number">01</div>
-            <div class="step-icon-row">
-              <div class="step-icon agent">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                  <path d="M9 12h6"/><path d="M12 9v6"/>
-                  <circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/>
-                  <path d="M5 18a7 7 0 0 1 14 0"/>
-                  <path d="M3.5 14.5l2 2 2-2"/><path d="M18.5 14.5l2 2 2-2"/>
-                </svg>
-              </div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">📂</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon service">
-                <!-- Google Drive -->
-                <svg viewBox="0 0 40 40" class="service-logo">
-                  <path d="M7 28l6-11h14l6 11H7z" fill="#4285F4"/>
-                  <path d="M27 17L20 5h-7l7 12h7z" fill="#FBBC04"/>
-                  <path d="M13 17L20 5h-7L6 17l7 11 6-11z" fill="#0F9D58"/>
-                </svg>
-              </div>
-            </div>
-            <div class="step-label">Template Fetch</div>
-            <div class="step-desc">Retrieve MSA/SOW from Drive</div>
-          </div>
-
-          <div class="flow-arrow flow-step"><svg viewBox="0 0 40 20"><line x1="0" y1="10" x2="32" y2="10" class="arrow-line"/><polygon points="32,5 40,10 32,15" class="arrow-head"/></svg></div>
-
-          <!-- Step 2 -->
-          <div class="flow-step">
-            <div class="step-number">02</div>
-            <div class="step-icon-row">
-              <div class="step-icon agent">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                  <path d="M9 12h6"/><path d="M12 9v6"/>
-                  <circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/>
-                  <path d="M5 18a7 7 0 0 1 14 0"/>
-                  <path d="M3.5 14.5l2 2 2-2"/><path d="M18.5 14.5l2 2 2-2"/>
-                </svg>
-              </div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">📝</div>
-            </div>
-            <div class="step-label">Dynamic Fill</div>
-            <div class="step-desc">Merge client data into doc</div>
-          </div>
-
-          <div class="flow-arrow flow-step"><svg viewBox="0 0 40 20"><line x1="0" y1="10" x2="32" y2="10" class="arrow-line"/><polygon points="32,5 40,10 32,15" class="arrow-head"/></svg></div>
-
-          <!-- Step 3 -->
-          <div class="flow-step">
-            <div class="step-number">03</div>
-            <div class="step-icon-row">
-              <div class="step-icon action">📄</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">⬇️</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon service">
-                <svg viewBox="0 0 40 40" class="service-logo">
-                  <rect x="6" y="4" width="28" height="32" rx="2" fill="#E53935"/>
-                  <text x="20" y="25" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="11">PDF</text>
-                </svg>
-              </div>
-            </div>
-            <div class="step-label">PDF Export</div>
-            <div class="step-desc">Convert to PDF format</div>
-          </div>
-
-          <div class="flow-arrow flow-step"><svg viewBox="0 0 40 20"><line x1="0" y1="10" x2="32" y2="10" class="arrow-line"/><polygon points="32,5 40,10 32,15" class="arrow-head"/></svg></div>
-
-          <!-- Step 4 -->
-          <div class="flow-step">
-            <div class="step-number">04</div>
-            <div class="step-icon-row">
-              <div class="step-icon service">
-                <svg viewBox="0 0 40 40" class="service-logo">
-                  <rect x="6" y="4" width="28" height="32" rx="2" fill="#E53935"/>
-                  <text x="20" y="25" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="11">PDF</text>
-                </svg>
-              </div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">✉️</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon service">
-                <!-- Gmail -->
-                <svg viewBox="0 0 40 40" class="service-logo">
-                  <rect x="4" y="8" width="32" height="24" rx="2" fill="#F1F1F1"/>
-                  <path d="M4 10l16 11 16-11" stroke="#EA4335" stroke-width="2.5" fill="none"/>
-                  <path d="M4 10l16 11" stroke="#4285F4" stroke-width="2" fill="none" opacity="0.5"/>
-                  <path d="M36 10l-16 11" stroke="#34A853" stroke-width="2" fill="none" opacity="0.5"/>
-                </svg>
-              </div>
-            </div>
-            <div class="step-label">Drafting</div>
-            <div class="step-desc">Gmail draft with attachment</div>
-          </div>
+      <div class="image-slide">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
+          <h2 class="slide-heading title-enter d1" style="opacity:0;margin-bottom:0;">Some of our happy clients</h2>
+          <img src="public/images/slide3-logos.png" alt="Logos slide" class="title-enter d2" style="max-height:calc(100vh - 220px);">
         </div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 5: Calendar & Meeting ==================== -->
+    <!-- ==================== SLIDE 5: Xero Invoicing ==================== -->
     <div class="slide" data-slide="4">
       <div class="brand-bar">
         <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
         <span class="url">kwanda.ai</span>
       </div>
       <div class="flow-slide">
-        <div class="slide-subtitle animate-in delay-1">Demo 4 — Calendar Integration</div>
-        <h2 class="slide-heading animate-in delay-2">Seamless Meeting Coordination</h2>
+        <div class="slide-subtitle">Demo 1 &mdash; Xero Integration</div>
+        <h2 class="slide-heading">Automated Financial Data Sync</h2>
         <div class="flow-diagram">
-          <!-- Step 1 -->
-          <div class="flow-step">
-            <div class="step-number">01</div>
-            <div class="step-icon-row">
-              <div class="step-icon agent">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                  <path d="M9 12h6"/><path d="M12 9v6"/>
-                  <circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/>
-                  <path d="M5 18a7 7 0 0 1 14 0"/>
-                  <path d="M3.5 14.5l2 2 2-2"/><path d="M18.5 14.5l2 2 2-2"/>
-                </svg>
-              </div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">📅</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon service">
-                <!-- Google Calendar -->
-                <svg viewBox="0 0 40 40" class="service-logo">
-                  <rect x="6" y="8" width="28" height="28" rx="3" fill="#4285F4"/>
-                  <rect x="10" y="14" width="20" height="18" rx="1" fill="white"/>
-                  <rect x="12" y="4" width="3" height="8" rx="1" fill="#4285F4"/>
-                  <rect x="25" y="4" width="3" height="8" rx="1" fill="#4285F4"/>
-                  <rect x="14" y="19" width="4" height="3" rx="0.5" fill="#4285F4"/>
-                  <rect x="22" y="19" width="4" height="3" rx="0.5" fill="#EA4335"/>
-                  <rect x="14" y="25" width="4" height="3" rx="0.5" fill="#0F9D58"/>
-                  <rect x="22" y="25" width="4" height="3" rx="0.5" fill="#FBBC04"/>
-                </svg>
-              </div>
+          <div class="flow-node">
+            <div class="node-step">01</div>
+            <div class="node-icon agent-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M15 3l2 2-2 2" opacity="0.5"/></svg>
             </div>
-            <div class="step-label">Availability Check</div>
-            <div class="step-desc">Scan calendar for free slots</div>
+            <div class="node-label">Instruction</div>
+            <div class="node-desc">"Create invoice for [Client]"</div>
           </div>
-
-          <div class="flow-arrow flow-step"><svg viewBox="0 0 40 20"><line x1="0" y1="10" x2="32" y2="10" class="arrow-line"/><polygon points="32,5 40,10 32,15" class="arrow-head"/></svg></div>
-
-          <!-- Step 2 -->
-          <div class="flow-step">
-            <div class="step-number">02</div>
-            <div class="step-icon-row">
-              <div class="step-icon agent">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                  <path d="M9 12h6"/><path d="M12 9v6"/>
-                  <circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/>
-                  <path d="M5 18a7 7 0 0 1 14 0"/>
-                  <path d="M3.5 14.5l2 2 2-2"/><path d="M18.5 14.5l2 2 2-2"/>
-                </svg>
-              </div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">👤</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon service">
-                <!-- Google Contacts -->
-                <svg viewBox="0 0 40 40" class="service-logo">
-                  <circle cx="20" cy="20" r="16" fill="#4285F4"/>
-                  <circle cx="20" cy="15" r="5" fill="white"/>
-                  <path d="M10 30a10 10 0 0 1 20 0" fill="white"/>
-                </svg>
-              </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+          <div class="flow-node">
+            <div class="node-step">02</div>
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img"><circle cx="20" cy="20" r="18" fill="#13B5EA"/><text x="20" y="27" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans,sans-serif" font-weight="800" font-size="20">X</text></svg>
             </div>
-            <div class="step-label">Contact Retrieval</div>
-            <div class="step-desc">Find participant email</div>
+            <div class="node-label">Contact Lookup</div>
+            <div class="node-desc">Search Xero contacts</div>
           </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+          <div class="flow-node">
+            <div class="node-step">03</div>
+            <div class="node-icon action-icon" style="font-size:34px;">📄</div>
+            <div class="node-label">Drafting</div>
+            <div class="node-desc">Generate invoice in Xero</div>
+          </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+          <div class="flow-node">
+            <div class="node-step">04</div>
+            <div class="node-icon success-icon" style="font-size:34px;">&#x2713;</div>
+            <div class="node-label">Complete</div>
+            <div class="node-desc">Invoice synced &amp; ready</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="flow-arrow flow-step"><svg viewBox="0 0 40 20"><line x1="0" y1="10" x2="32" y2="10" class="arrow-line"/><polygon points="32,5 40,10 32,15" class="arrow-head"/></svg></div>
-
-          <!-- Step 3 -->
-          <div class="flow-step">
-            <div class="step-number">03</div>
-            <div class="step-icon-row">
-              <div class="step-icon agent">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                  <path d="M9 12h6"/><path d="M12 9v6"/>
-                  <circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/>
-                  <path d="M5 18a7 7 0 0 1 14 0"/>
-                  <path d="M3.5 14.5l2 2 2-2"/><path d="M18.5 14.5l2 2 2-2"/>
-                </svg>
-              </div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">➕</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon service">
-                <svg viewBox="0 0 40 40" class="service-logo">
-                  <rect x="6" y="8" width="28" height="28" rx="3" fill="#4285F4"/>
-                  <rect x="10" y="14" width="20" height="18" rx="1" fill="white"/>
-                  <rect x="12" y="4" width="3" height="8" rx="1" fill="#4285F4"/>
-                  <rect x="25" y="4" width="3" height="8" rx="1" fill="#4285F4"/>
-                  <rect x="14" y="19" width="4" height="3" rx="0.5" fill="#4285F4"/>
-                  <rect x="22" y="19" width="4" height="3" rx="0.5" fill="#EA4335"/>
-                  <rect x="14" y="25" width="4" height="3" rx="0.5" fill="#0F9D58"/>
-                  <rect x="22" y="25" width="4" height="3" rx="0.5" fill="#FBBC04"/>
-                </svg>
-              </div>
+    <!-- ==================== SLIDE 6: CRM Management ==================== -->
+    <div class="slide" data-slide="5">
+      <div class="brand-bar">
+        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
+        <span class="url">kwanda.ai</span>
+      </div>
+      <div class="flow-slide">
+        <div class="slide-subtitle">Demo 2 &mdash; CRM Automation</div>
+        <h2 class="slide-heading">Intelligent Lead Pipeline Management</h2>
+        <div class="flow-diagram">
+          <div class="flow-node">
+            <div class="node-step">01</div>
+            <div class="node-icon action-icon" style="font-size:34px;">📥</div>
+            <div class="node-label">Inbound</div>
+            <div class="node-desc">Lead detected from email</div>
+          </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+          <div class="flow-node">
+            <div class="node-step">02</div>
+            <div class="node-icon agent-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h-2V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 12h2m2 0h2"/><circle cx="9" cy="15" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="1" fill="currentColor" stroke="none"/></svg>
             </div>
-            <div class="step-label">Scheduling</div>
-            <div class="step-desc">Create event + Meet link</div>
+            <div class="node-label">Extraction</div>
+            <div class="node-desc">Parse name, company &amp; budget</div>
           </div>
-
-          <div class="flow-arrow flow-step"><svg viewBox="0 0 40 20"><line x1="0" y1="10" x2="32" y2="10" class="arrow-line"/><polygon points="32,5 40,10 32,15" class="arrow-head"/></svg></div>
-
-          <!-- Step 4 -->
-          <div class="flow-step">
-            <div class="step-number">04</div>
-            <div class="step-icon-row">
-              <div class="step-icon service">
-                <svg viewBox="0 0 40 40" class="service-logo">
-                  <rect x="6" y="8" width="28" height="28" rx="3" fill="#4285F4"/>
-                  <rect x="10" y="14" width="20" height="18" rx="1" fill="white"/>
-                  <rect x="12" y="4" width="3" height="8" rx="1" fill="#4285F4"/>
-                  <rect x="25" y="4" width="3" height="8" rx="1" fill="#4285F4"/>
-                  <rect x="14" y="19" width="4" height="3" rx="0.5" fill="#4285F4"/>
-                  <rect x="22" y="19" width="4" height="3" rx="0.5" fill="#EA4335"/>
-                  <rect x="14" y="25" width="4" height="3" rx="0.5" fill="#0F9D58"/>
-                  <rect x="22" y="25" width="4" height="3" rx="0.5" fill="#FBBC04"/>
-                </svg>
-              </div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">📤</div>
-              <span style="font-size: 18px; color: var(--clay); opacity: 0.5;">→</span>
-              <div class="step-icon action">📧</div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+          <div class="flow-node">
+            <div class="node-step">03</div>
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img"><rect x="4" y="4" width="32" height="32" rx="4" fill="#0F9D58"/><rect x="10" y="12" width="20" height="18" rx="1" fill="white"/><line x1="20" y1="12" x2="20" y2="30" stroke="#0F9D58" stroke-width="1.2"/><line x1="10" y1="19" x2="30" y2="19" stroke="#0F9D58" stroke-width="1.2"/><line x1="10" y1="25" x2="30" y2="25" stroke="#0F9D58" stroke-width="1.2"/></svg>
             </div>
-            <div class="step-label">Invitation</div>
-            <div class="step-desc">Invites dispatched to all</div>
+            <div class="node-label">Database Update</div>
+            <div class="node-desc">Write to Google Sheets</div>
           </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+          <div class="flow-node">
+            <div class="node-step">04</div>
+            <div class="node-icon action-icon" style="font-size:34px;">💬</div>
+            <div class="node-label">Confirmation</div>
+            <div class="node-desc">Notify via Slack / Telegram</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SLIDE 7: SOW & Document Gen ==================== -->
+    <div class="slide" data-slide="6">
+      <div class="brand-bar">
+        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
+        <span class="url">kwanda.ai</span>
+      </div>
+      <div class="flow-slide">
+        <div class="slide-subtitle">Demo 3 &mdash; Document Generation</div>
+        <h2 class="slide-heading">Instant Legal Document Creation</h2>
+        <div class="flow-diagram">
+          <div class="flow-node">
+            <div class="node-step">01</div>
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img"><path d="M8 30l7-13h17l7 13H8z" fill="#4285F4" transform="translate(-3,-2) scale(0.88)"/><path d="M32 17L24 3h-8l8 14h8z" fill="#FBBC04" transform="translate(-3,-2) scale(0.88)"/><path d="M16 17L24 3h-8L8 17l8 13 8-13z" fill="#0F9D58" transform="translate(-3,-2) scale(0.88)"/></svg>
+            </div>
+            <div class="node-label">Template Fetch</div>
+            <div class="node-desc">Retrieve SOW from Google Drive</div>
+          </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+          <div class="flow-node">
+            <div class="node-step">02</div>
+            <div class="node-icon agent-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h-2V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 12h2m2 0h2"/><circle cx="9" cy="15" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="1" fill="currentColor" stroke="none"/></svg>
+            </div>
+            <div class="node-label">Dynamic Fill</div>
+            <div class="node-desc">Merge client data into document</div>
+          </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+          <div class="flow-node">
+            <div class="node-step">03</div>
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img"><rect x="6" y="4" width="28" height="32" rx="3" fill="#E53935"/><text x="20" y="25" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans,sans-serif" font-weight="800" font-size="12">PDF</text></svg>
+            </div>
+            <div class="node-label">PDF Export</div>
+            <div class="node-desc">Convert to PDF format</div>
+          </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+          <div class="flow-node">
+            <div class="node-step">04</div>
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img"><rect x="4" y="9" width="32" height="23" rx="3" fill="#EA4335"/><path d="M4 12l16 10 16-10" fill="none" stroke="white" stroke-width="2"/><rect x="4" y="9" width="32" height="4" rx="2" fill="#D93025"/></svg>
+            </div>
+            <div class="node-label">Email Draft</div>
+            <div class="node-desc">Gmail draft with attachment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SLIDE 8: Calendar & Meeting ==================== -->
+    <div class="slide" data-slide="7">
+      <div class="brand-bar">
+        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
+        <span class="url">kwanda.ai</span>
+      </div>
+      <div class="flow-slide">
+        <div class="slide-subtitle">Demo 4 &mdash; Calendar Integration</div>
+        <h2 class="slide-heading">Seamless Meeting Coordination</h2>
+        <div class="flow-diagram">
+          <div class="flow-node">
+            <div class="node-step">01</div>
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img"><rect x="6" y="8" width="28" height="28" rx="4" fill="#4285F4"/><rect x="10" y="15" width="20" height="17" rx="1" fill="white"/><rect x="13" y="4" width="3" height="8" rx="1.5" fill="#4285F4"/><rect x="24" y="4" width="3" height="8" rx="1.5" fill="#4285F4"/><rect x="14" y="20" width="4" height="3" rx="0.5" fill="#4285F4" opacity="0.7"/><rect x="22" y="20" width="4" height="3" rx="0.5" fill="#EA4335" opacity="0.7"/><rect x="14" y="26" width="4" height="3" rx="0.5" fill="#0F9D58" opacity="0.7"/><rect x="22" y="26" width="4" height="3" rx="0.5" fill="#FBBC04" opacity="0.7"/></svg>
+            </div>
+            <div class="node-label">Availability Check</div>
+            <div class="node-desc">Scan calendar for free slots</div>
+          </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+          <div class="flow-node">
+            <div class="node-step">02</div>
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img"><circle cx="20" cy="20" r="17" fill="#4285F4"/><circle cx="20" cy="15" r="5" fill="white"/><path d="M10.5 31a10 10 0 0 1 19 0" fill="white"/></svg>
+            </div>
+            <div class="node-label">Contact Retrieval</div>
+            <div class="node-desc">Find participant email</div>
+          </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+          <div class="flow-node">
+            <div class="node-step">03</div>
+            <div class="node-icon agent-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h-2V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 12h2m2 0h2"/><circle cx="9" cy="15" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="1" fill="currentColor" stroke="none"/></svg>
+            </div>
+            <div class="node-label">Scheduling</div>
+            <div class="node-desc">Create event + Meet link</div>
+          </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+          <div class="flow-node">
+            <div class="node-step">04</div>
+            <div class="node-icon action-icon" style="font-size:34px;">📤</div>
+            <div class="node-label">Invitation</div>
+            <div class="node-desc">Invites dispatched to all</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SLIDE 9: AI ADOPTION ==================== -->
+    <div class="slide" data-slide="8">
+      <div class="brand-bar">
+        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
+        <span class="url">kwanda.ai</span>
+      </div>
+      <div class="adoption-slide">
+        <div class="adoption-left">
+          <div class="slide-subtitle" style="opacity:0;">The Opportunity</div>
+          <h2 class="title-enter d1">AI adoption is still <span class="highlight">extremely</span> low.</h2>
+          <p class="title-enter d2">The vast majority of the world has never meaningfully interacted with AI. For businesses willing to move now, the competitive advantage is enormous.</p>
+        </div>
+        <div class="adoption-right title-enter d3">
+          <img src="public/images/ai-adoption.jpeg" alt="AI Adoption Chart">
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SLIDE 10: THANK YOU / QR ==================== -->
+    <div class="slide" data-slide="9">
+      <div class="brand-bar">
+        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
+        <span class="url">kwanda.ai</span>
+      </div>
+      <div class="adoption-slide">
+        <div class="adoption-left">
+          <h2 class="title-enter d1">Thank you.</h2>
+          <p class="title-enter d2">Scan the QR to start your agentic journey.</p>
+        </div>
+        <div class="adoption-right title-enter d3">
+          <img src="public/images/qr-code.png" alt="QR Code" style="max-height:420px;">
         </div>
       </div>
     </div>
@@ -1065,87 +619,395 @@
     <div class="dot" data-goto="2"></div>
     <div class="dot" data-goto="3"></div>
     <div class="dot" data-goto="4"></div>
+    <div class="dot" data-goto="5"></div>
+    <div class="dot" data-goto="6"></div>
+    <div class="dot" data-goto="7"></div>
+    <div class="dot" data-goto="8"></div>
+    <div class="dot" data-goto="9"></div>
   </div>
+
+  <script>
+    // ==================== NETWORK CANVAS ANIMATION ====================
+    (function() {
+      const canvas = document.getElementById('networkCanvas');
+      const ctx = canvas.getContext('2d');
+      const W = 1000, H = 1000;
+      const CX = W/2, CY = H/2;
+      const MOSS = '#2E4036';
+      const CLAY = '#CC5833';
+      const TEAL = '#2E5A5A';
+      const GOLD = '#C4A265';
+      const CREAM = '#F2F0E9';
+      const SALMON = '#D4836B';
+
+      // Isometric helpers
+      function isoX(x, y) { return CX + (x - y) * 0.866 * 32; }
+      function isoY(x, y, z) { return CY + (x + y) * 0.5 * 32 - z * 32; }
+
+      // Cube drawer (isometric)
+      function drawCube(x, y, z, size, topColor, leftColor, rightColor, alpha) {
+        const s = size;
+        const px = isoX(x, y);
+        const py = isoY(x, y, z);
+        ctx.globalAlpha = alpha;
+
+        // Top face
+        ctx.beginPath();
+        ctx.moveTo(px, py - s);
+        ctx.lineTo(px + s * 0.866, py - s * 0.5);
+        ctx.lineTo(px, py);
+        ctx.lineTo(px - s * 0.866, py - s * 0.5);
+        ctx.closePath();
+        ctx.fillStyle = topColor;
+        ctx.fill();
+
+        // Left face
+        ctx.beginPath();
+        ctx.moveTo(px - s * 0.866, py - s * 0.5);
+        ctx.lineTo(px, py);
+        ctx.lineTo(px, py + s);
+        ctx.lineTo(px - s * 0.866, py + s * 0.5);
+        ctx.closePath();
+        ctx.fillStyle = leftColor;
+        ctx.fill();
+
+        // Right face
+        ctx.beginPath();
+        ctx.moveTo(px + s * 0.866, py - s * 0.5);
+        ctx.lineTo(px, py);
+        ctx.lineTo(px, py + s);
+        ctx.lineTo(px + s * 0.866, py + s * 0.5);
+        ctx.closePath();
+        ctx.fillStyle = rightColor;
+        ctx.fill();
+
+        ctx.globalAlpha = 1;
+      }
+
+      // Cubes definition: [gridX, gridY, gridZ, size, colorSet, floatSpeed, floatPhase]
+      // colorSet: 0=moss, 1=clay, 2=teal, 3=gold
+      const colorSets = [
+        ['#4a6b56', '#2E4036', '#3a5545'],   // moss
+        ['#d4734e', '#CC5833', '#b84a2a'],    // clay/salmon
+        ['#3a7070', '#2E5A5A', '#245050'],    // teal
+        ['#d4b678', '#C4A265', '#a88b50'],    // gold
+      ];
+
+      const cubes = [
+        // Central cluster - large cubes
+        [0, 0, 2, 42, 3, 0.8, 0],      // gold center (hero)
+        [-1.2, 0, 1, 38, 2, 0.6, 1],    // teal left
+        [1.2, 0, 1, 38, 2, 0.7, 2],     // teal right
+        [0, -1.2, 1, 38, 2, 0.5, 0.5],  // teal back
+        [0, 1.2, 0.5, 35, 2, 0.6, 1.5], // teal front
+
+        // Second ring - medium cubes
+        [-2, -1, 1.5, 28, 1, 0.9, 0.3],  // salmon
+        [2, -1, 1.5, 28, 2, 0.7, 1.2],   // teal
+        [-1, -2, 1, 26, 2, 0.8, 0.8],    // teal
+        [1, -2, 1.5, 30, 1, 0.6, 2],     // salmon
+        [-2, 1, 0.5, 28, 1, 0.7, 1.7],   // salmon
+        [2, 1, 0.5, 26, 2, 0.8, 0.4],    // teal
+        [0, -2, 2, 24, 1, 0.9, 1],       // salmon
+
+        // Third ring - smaller cubes
+        [-3, 0, 1, 22, 2, 1.0, 0.6],
+        [3, 0, 0.5, 20, 1, 0.8, 1.8],
+        [-2, -2, 0.5, 18, 1, 0.9, 0.2],
+        [2, -2, 1, 20, 2, 0.7, 1.4],
+        [-1, 2, 0, 20, 2, 0.8, 2.1],
+        [1, 2, 0, 18, 1, 0.9, 0.9],
+        [0, 2.5, 0, 16, 1, 1.0, 1.6],
+        [-3, -1, 0.5, 16, 2, 0.7, 0.4],
+        [3, -1, 0.5, 16, 1, 0.8, 1.1],
+
+        // Outer small cubes
+        [-4, 0.5, 0, 14, 1, 1.1, 0.7],
+        [4, -0.5, 0, 12, 2, 1.0, 1.3],
+        [-3, 2, 0, 12, 2, 0.9, 2.3],
+        [3, 1.5, 0, 14, 1, 1.1, 0.1],
+        [-2, 3, 0, 10, 1, 1.0, 1.9],
+        [2, 2.5, 0, 10, 2, 0.8, 0.5],
+        [-4, -2, 0, 10, 1, 0.9, 1.7],
+        [4, -2, 0, 10, 2, 1.0, 2.2],
+      ];
+
+      // Pipes: [startX, startY, controlPoints..., endX, endY, color, width, speed]
+      const pipes = [
+        // Left extending pipes
+        {pts: [{x:-180,y:-20},{x:-220,y:-60},{x:-280,y:-60},{x:-320,y:-20},{x:-320,y:40},{x:-280,y:80}], color: CLAY, w: 2.5, speed: 1.2},
+        {pts: [{x:-160,y:60},{x:-200,y:100},{x:-260,y:120},{x:-300,y:100},{x:-340,y:60}], color: TEAL, w: 2, speed: 0.9},
+        {pts: [{x:-140,y:-80},{x:-180,y:-120},{x:-240,y:-140},{x:-300,y:-120}], color: GOLD, w: 1.8, speed: 1.5},
+
+        // Right extending pipes
+        {pts: [{x:180,y:-20},{x:220,y:-60},{x:280,y:-80},{x:340,y:-40},{x:360,y:20}], color: TEAL, w: 2.5, speed: 1.0},
+        {pts: [{x:160,y:60},{x:200,y:100},{x:260,y:80},{x:320,y:100},{x:360,y:80}], color: CLAY, w: 2, speed: 1.3},
+        {pts: [{x:140,y:-80},{x:200,y:-130},{x:280,y:-150},{x:340,y:-120}], color: GOLD, w: 1.8, speed: 0.8},
+
+        // Top pipes
+        {pts: [{x:-60,y:-140},{x:-80,y:-200},{x:-40,y:-260},{x:20,y:-280}], color: CLAY, w: 2, speed: 1.1},
+        {pts: [{x:60,y:-140},{x:80,y:-200},{x:120,y:-240},{x:160,y:-220}], color: TEAL, w: 2, speed: 1.4},
+
+        // Bottom pipes
+        {pts: [{x:-60,y:120},{x:-100,y:180},{x:-80,y:240},{x:-120,y:280}], color: TEAL, w: 2, speed: 0.7},
+        {pts: [{x:60,y:120},{x:100,y:180},{x:140,y:220},{x:120,y:270}], color: CLAY, w: 1.8, speed: 1.2},
+
+        // Diagonal pipes
+        {pts: [{x:-120,y:-100},{x:-180,y:-160},{x:-220,y:-220}], color: TEAL, w: 1.5, speed: 1.6},
+        {pts: [{x:120,y:-100},{x:180,y:-160},{x:220,y:-220}], color: CLAY, w: 1.5, speed: 0.9},
+      ];
+
+      // Endpoint nodes (dots at pipe ends)
+      const endNodes = [
+        {x:-280,y:80,r:6,color:CLAY}, {x:-340,y:60,r:5,color:TEAL}, {x:-300,y:-120,r:5,color:GOLD},
+        {x:360,y:20,r:6,color:TEAL}, {x:360,y:80,r:5,color:CLAY}, {x:340,y:-120,r:5,color:GOLD},
+        {x:20,y:-280,r:5,color:CLAY}, {x:160,y:-220,r:5,color:TEAL},
+        {x:-120,y:280,r:5,color:TEAL}, {x:120,y:270,r:5,color:CLAY},
+        {x:-220,y:-220,r:4,color:TEAL}, {x:220,y:-220,r:4,color:CLAY},
+      ];
+
+      // Data particles traveling along pipes
+      class Particle {
+        constructor(pipe, offset) {
+          this.pipe = pipe;
+          this.t = offset;
+          this.speed = pipe.speed * 0.003;
+        }
+        update() {
+          this.t += this.speed;
+          if (this.t > 1) this.t -= 1;
+        }
+        getPos() {
+          const pts = this.pipe.pts;
+          const total = pts.length - 1;
+          const segment = Math.floor(this.t * total);
+          const segT = (this.t * total) - segment;
+          const i = Math.min(segment, total - 1);
+          return {
+            x: CX + pts[i].x + (pts[Math.min(i+1,total)].x - pts[i].x) * segT,
+            y: CY + pts[i].y + (pts[Math.min(i+1,total)].y - pts[i].y) * segT
+          };
+        }
+      }
+
+      const particles = [];
+      pipes.forEach(pipe => {
+        for (let i = 0; i < 3; i++) {
+          particles.push(new Particle(pipe, i / 3));
+        }
+      });
+
+      // Glow spots (soft white glows)
+      const glows = [
+        {x: -120, y: -100, r: 60, phase: 0},
+        {x: 140, y: -80, r: 50, phase: 1.5},
+        {x: -80, y: 80, r: 45, phase: 3},
+        {x: 100, y: 60, r: 40, phase: 0.8},
+      ];
+
+      let time = 0;
+
+      function render() {
+        time += 0.016;
+        ctx.clearRect(0, 0, W, H);
+
+        // Draw soft glows behind everything
+        glows.forEach(g => {
+          const alpha = 0.12 + Math.sin(time * 0.8 + g.phase) * 0.06;
+          const grad = ctx.createRadialGradient(CX + g.x, CY + g.y, 0, CX + g.x, CY + g.y, g.r);
+          grad.addColorStop(0, `rgba(255,255,255,${alpha})`);
+          grad.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = grad;
+          ctx.fillRect(CX + g.x - g.r, CY + g.y - g.r, g.r * 2, g.r * 2);
+        });
+
+        // Draw pipes
+        pipes.forEach(pipe => {
+          ctx.beginPath();
+          ctx.moveTo(CX + pipe.pts[0].x, CY + pipe.pts[0].y);
+          for (let i = 1; i < pipe.pts.length; i++) {
+            // Smooth curve through points
+            if (i < pipe.pts.length - 1) {
+              const midX = (pipe.pts[i].x + pipe.pts[i+1].x) / 2;
+              const midY = (pipe.pts[i].y + pipe.pts[i+1].y) / 2;
+              ctx.quadraticCurveTo(CX + pipe.pts[i].x, CY + pipe.pts[i].y, CX + midX, CY + midY);
+            } else {
+              ctx.lineTo(CX + pipe.pts[i].x, CY + pipe.pts[i].y);
+            }
+          }
+          ctx.strokeStyle = pipe.color;
+          ctx.lineWidth = pipe.w;
+          ctx.globalAlpha = 0.35;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        });
+
+        // Draw end nodes with pulse
+        endNodes.forEach((n, i) => {
+          const pulse = 1 + Math.sin(time * 2 + i * 0.7) * 0.3;
+          const r = n.r * pulse;
+
+          // Glow
+          ctx.globalAlpha = 0.15 + Math.sin(time * 2 + i) * 0.1;
+          ctx.beginPath();
+          ctx.arc(CX + n.x, CY + n.y, r * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = n.color;
+          ctx.fill();
+
+          // Solid dot
+          ctx.globalAlpha = 0.7;
+          ctx.beginPath();
+          ctx.arc(CX + n.x, CY + n.y, r, 0, Math.PI * 2);
+          ctx.fillStyle = n.color;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        });
+
+        // Draw cubes (sorted back-to-front)
+        const sortedCubes = [...cubes].sort((a, b) => {
+          return (a[0] + a[1]) - (b[0] + b[1]);
+        });
+
+        sortedCubes.forEach(c => {
+          const [gx, gy, gz, size, colorIdx, floatSpd, floatPhase] = c;
+          const floatOffset = Math.sin(time * floatSpd + floatPhase) * 6;
+          const cs = colorSets[colorIdx];
+          const px = isoX(gx, gy);
+          const py = isoY(gx, gy, gz) + floatOffset;
+          const s = size;
+          const alpha = size > 30 ? 0.9 : size > 20 ? 0.75 : 0.55;
+
+          ctx.globalAlpha = alpha;
+
+          // Right face (darkest)
+          ctx.beginPath();
+          ctx.moveTo(px + s * 0.866, py - s * 0.5);
+          ctx.lineTo(px, py);
+          ctx.lineTo(px, py + s);
+          ctx.lineTo(px + s * 0.866, py + s * 0.5);
+          ctx.closePath();
+          ctx.fillStyle = cs[2];
+          ctx.fill();
+
+          // Left face
+          ctx.beginPath();
+          ctx.moveTo(px - s * 0.866, py - s * 0.5);
+          ctx.lineTo(px, py);
+          ctx.lineTo(px, py + s);
+          ctx.lineTo(px - s * 0.866, py + s * 0.5);
+          ctx.closePath();
+          ctx.fillStyle = cs[1];
+          ctx.fill();
+
+          // Top face (lightest)
+          ctx.beginPath();
+          ctx.moveTo(px, py - s);
+          ctx.lineTo(px + s * 0.866, py - s * 0.5);
+          ctx.lineTo(px, py);
+          ctx.lineTo(px - s * 0.866, py - s * 0.5);
+          ctx.closePath();
+          ctx.fillStyle = cs[0];
+          ctx.fill();
+
+          // Subtle edge highlight
+          ctx.globalAlpha = alpha * 0.15;
+          ctx.beginPath();
+          ctx.moveTo(px, py - s);
+          ctx.lineTo(px, py + s);
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          ctx.globalAlpha = 1;
+        });
+
+        // Draw data particles
+        particles.forEach(p => {
+          p.update();
+          const pos = p.getPos();
+          const glow = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, 8);
+          glow.addColorStop(0, p.pipe.color + 'cc');
+          glow.addColorStop(1, p.pipe.color + '00');
+          ctx.fillStyle = glow;
+          ctx.fillRect(pos.x - 8, pos.y - 8, 16, 16);
+
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, 3, 0, Math.PI * 2);
+          ctx.fillStyle = p.pipe.color;
+          ctx.globalAlpha = 0.9;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        });
+
+        requestAnimationFrame(render);
+      }
+
+      render();
+    })();
+  </script>
 
   <script>
     (function() {
       const slides = document.querySelectorAll('.slide');
       const dots = document.querySelectorAll('.dot');
       let current = 0;
-      let transitioning = false;
+      let pendingCleanups = [];
 
       function goTo(index) {
-        if (transitioning || index === current || index < 0 || index >= slides.length) return;
-        transitioning = true;
+        if (index === current || index < 0 || index >= slides.length) return;
+
+        // Clean up any in-progress transitions immediately
+        pendingCleanups.forEach(fn => fn());
+        pendingCleanups = [];
 
         const direction = index > current ? 1 : -1;
         const oldSlide = slides[current];
         const newSlide = slides[index];
 
-        // Exit old slide
-        oldSlide.classList.remove('active');
-        oldSlide.classList.add(direction > 0 ? 'exit-left' : '');
-        if (direction < 0) {
-          oldSlide.style.transform = 'translateX(60px)';
-          oldSlide.style.opacity = '0';
-        }
+        // Immediately hide old slide
+        oldSlide.classList.remove('active', 'exit-left');
+        oldSlide.style.transform = '';
+        oldSlide.style.opacity = '0';
+        oldSlide.style.transition = 'none';
 
-        // Enter new slide
-        if (direction > 0) {
-          newSlide.style.transform = 'translateX(60px)';
-        } else {
-          newSlide.classList.add('exit-left');
-          // Force reflow
-          newSlide.offsetHeight;
-          newSlide.classList.remove('exit-left');
-        }
+        // Set up new slide entry
+        newSlide.style.transition = 'none';
+        newSlide.style.transform = direction > 0 ? 'translateX(60px)' : 'translateX(-60px)';
+        newSlide.style.opacity = '0';
+        newSlide.offsetHeight; // reflow
 
-        // Force reflow
-        newSlide.offsetHeight;
-
-        newSlide.classList.add('active');
+        // Animate in
+        newSlide.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
         newSlide.style.transform = '';
+        newSlide.style.opacity = '';
+        newSlide.classList.add('active');
 
-        // Update dots
         dots.forEach(d => d.classList.remove('active'));
         dots[index].classList.add('active');
-
         current = index;
 
-        setTimeout(() => {
-          oldSlide.classList.remove('exit-left');
-          oldSlide.style.transform = '';
+        // Schedule cleanup (non-blocking)
+        const cleanup = () => {
+          oldSlide.style.transition = '';
           oldSlide.style.opacity = '';
-          transitioning = false;
-        }, 550);
+          oldSlide.style.transform = '';
+        };
+        const timer = setTimeout(cleanup, 450);
+        pendingCleanups.push(() => { clearTimeout(timer); cleanup(); });
       }
 
-      function next() { goTo(current + 1); }
-      function prev() { goTo(current - 1); }
-
-      // Keyboard navigation
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === ' ') {
-          e.preventDefault();
-          next();
-        } else if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          prev();
-        }
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
       });
-
-      // Click to advance (not on dots)
       document.addEventListener('click', (e) => {
         if (e.target.closest('.dot-nav')) return;
-        next();
+        goTo(current + 1);
       });
-
-      // Dot clicks
       dots.forEach(dot => {
-        dot.addEventListener('click', (e) => {
-          e.stopPropagation();
-          goTo(parseInt(dot.dataset.goto));
-        });
+        dot.addEventListener('click', (e) => { e.stopPropagation(); goTo(parseInt(dot.dataset.goto)); });
       });
     })();
   </script>
