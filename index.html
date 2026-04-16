@@ -751,17 +751,72 @@
         <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
         <span class="url">kwanda.ai</span>
       </div>
-      <div style="height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 100px;text-align:center;">
-        <div class="slide-subtitle" style="margin-bottom:16px;">Section 3 &mdash; Agentic AI</div>
-        <h2 class="slide-heading" style="margin-bottom:40px;">What are skills?</h2>
-        <p class="title-enter d3" style="font-size:22px;max-width:740px;color:var(--moss);opacity:0.6;line-height:1.75;font-family:'Plus Jakarta Sans',sans-serif;">
-          Pre-built natural language instructions or recipes to carry out complex workflows
-        </p>
-        <div class="title-enter d4" style="display:flex;gap:12px;margin-top:40px;flex-wrap:wrap;justify-content:center;">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;padding:9px 18px;border-radius:8px;background:var(--moss);color:var(--cream);opacity:0.85;">/create-proposal</span>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;padding:9px 18px;border-radius:8px;background:var(--moss);color:var(--cream);opacity:0.85;">/onboard-client</span>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;padding:9px 18px;border-radius:8px;background:var(--moss);color:var(--cream);opacity:0.85;">/invoice-from-whatsapp</span>
+      <div style="height:100vh;display:flex;align-items:center;padding:80px 60px 80px 80px;gap:64px;">
+
+        <!-- Left: heading + description + pills -->
+        <div style="flex:0 0 36%;display:flex;flex-direction:column;justify-content:center;">
+          <div class="slide-subtitle" style="text-align:left;margin-bottom:16px;">Section 3 &mdash; Agentic AI</div>
+          <h2 class="slide-heading" style="text-align:left;margin-bottom:24px;font-size:48px;">What are<br>skills?</h2>
+          <p class="title-enter d3" style="font-size:18px;color:var(--moss);opacity:0.58;line-height:1.75;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:32px;">
+            Pre-built natural language instructions or recipes to carry out complex workflows
+          </p>
+          <div class="title-enter d4" style="display:flex;gap:9px;flex-wrap:wrap;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;padding:8px 14px;border-radius:7px;background:var(--moss);color:var(--cream);opacity:0.85;">/create-proposal</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;padding:8px 14px;border-radius:7px;background:var(--moss);color:var(--cream);opacity:0.85;">/onboard-client</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;padding:8px 14px;border-radius:7px;background:var(--moss);color:var(--cream);opacity:0.85;">/invoice-from-whatsapp</span>
+          </div>
         </div>
+
+        <!-- Right: skill document pane -->
+        <div class="title-enter d3" style="flex:1;display:flex;flex-direction:column;max-height:72vh;opacity:0;">
+          <!-- Window chrome -->
+          <div style="background:var(--moss);border-radius:14px 14px 0 0;padding:11px 18px;display:flex;align-items:center;gap:7px;flex-shrink:0;">
+            <div style="width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,0.12);"></div>
+            <div style="width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,0.12);"></div>
+            <div style="width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,0.12);"></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,0.35);margin-left:10px;letter-spacing:0.05em;">create-proposal.md</span>
+          </div>
+          <!-- Document body -->
+          <div style="background:white;border:1.5px solid rgba(46,64,54,0.07);border-top:none;border-radius:0 0 14px 14px;padding:28px 32px 0;flex:1;overflow:hidden;position:relative;box-shadow:0 12px 48px rgba(0,0,0,0.07);">
+
+            <!-- Skill name -->
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:600;color:var(--clay);margin-bottom:10px;">/create-proposal</div>
+            <!-- One-liner -->
+            <p style="font-family:'Outfit',sans-serif;font-size:14px;color:var(--moss);opacity:0.5;line-height:1.6;margin-bottom:28px;max-width:480px;">Generate a tailored client proposal using recent meeting notes and email history.</p>
+
+            <!-- Section: When to use -->
+            <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:10px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--clay);opacity:0.55;font-weight:600;">##</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--moss);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">When to use</span>
+            </div>
+            <p style="font-family:'Outfit',sans-serif;font-size:13.5px;color:var(--moss);opacity:0.45;line-height:1.65;margin-bottom:26px;max-width:500px;">When you need a first-draft proposal for a prospective or existing client, informed by your most recent conversations with them.</p>
+
+            <!-- Section: Steps -->
+            <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:10px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--clay);opacity:0.55;font-weight:600;">##</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--moss);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Steps</span>
+            </div>
+            <div style="font-family:'Outfit',sans-serif;font-size:13.5px;color:var(--moss);opacity:0.45;line-height:1.9;margin-bottom:26px;">
+              <div>1. Pull the latest meeting notes from Granola</div>
+              <div>2. Read relevant email threads from Gmail</div>
+              <div>3. Draft a structured proposal document</div>
+              <div>4. Save as a Gmail draft ready to send</div>
+            </div>
+
+            <!-- Section: Example -->
+            <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:10px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--clay);opacity:0.55;font-weight:600;">##</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--moss);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Example</span>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--moss);opacity:0.4;line-height:1.6;background:rgba(46,64,54,0.04);border-radius:8px;padding:14px 16px;border-left:3px solid rgba(204,88,51,0.25);">
+              "Create a proposal for Bishops School<br>based on our discovery call yesterday"
+            </div>
+
+            <!-- Fade-out gradient suggesting scrollability -->
+            <div style="position:absolute;bottom:0;left:0;right:0;height:72px;background:linear-gradient(to bottom,rgba(255,255,255,0),white);pointer-events:none;border-radius:0 0 14px 14px;"></div>
+          </div>
+        </div>
+
       </div>
     </div>
 
