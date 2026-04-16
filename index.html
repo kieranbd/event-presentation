@@ -318,13 +318,87 @@
       border: 1px solid rgba(46,64,54,0.08);
       box-shadow: 0 8px 40px rgba(0,0,0,0.06);
     }
+
+    /* ==================== SECTION HEADER SLIDES (dark) ==================== */
+    .section-slide-dark {
+      height: 100vh;
+      background: var(--moss);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 60px 80px; text-align: center;
+    }
+    .section-num {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--clay); font-weight: 600; margin-bottom: 20px;
+    }
+    .section-slide-dark h1 {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-weight: 800; font-size: 64px;
+      color: var(--cream); line-height: 1.15;
+      margin-bottom: 36px;
+    }
+    .section-desc {
+      font-size: 22px; color: var(--cream); opacity: 0.6;
+      line-height: 1.65; max-width: 680px;
+    }
+    .section-bullets {
+      list-style: none; text-align: left; max-width: 620px;
+    }
+    .section-bullets li {
+      display: flex; align-items: flex-start; gap: 16px;
+      font-size: 20px; color: var(--cream); opacity: 0.7;
+      line-height: 1.55; margin-bottom: 18px;
+    }
+    .section-bullets li:last-child { margin-bottom: 0; }
+    .bullet-dash { color: var(--clay); font-weight: 700; flex-shrink: 0; }
+
+    /* ==================== TWO-ROW DEMO ==================== */
+    .demo-rows {
+      display: flex; flex-direction: column; gap: 32px;
+      width: 100%; max-width: 920px;
+    }
+    .demo-row {
+      display: flex; align-items: center; gap: 20px;
+    }
+    .demo-row-label {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--moss); opacity: 0.3;
+      width: 72px; text-align: right; flex-shrink: 0;
+    }
+    .demo-row .flow-diagram { justify-content: flex-start; max-width: none; }
+    .node-icon.no-result-icon {
+      background: rgba(239,68,68,0.04);
+      border: 1.5px dashed rgba(239,68,68,0.25);
+    }
+
+    /* Email result card */
+    .email-result-card {
+      width: 108px;
+      background: white;
+      border: 1.5px solid rgba(46,64,54,0.08);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      border-radius: 16px; padding: 11px 13px;
+      display: flex; flex-direction: column; gap: 6px;
+      margin-bottom: 18px;
+    }
+    .email-row { display: flex; align-items: center; gap: 7px; }
+    .email-dot {
+      width: 15px; height: 15px; border-radius: 4px;
+      background: #EA4335; flex-shrink: 0; opacity: 0.8;
+    }
+    .email-line {
+      height: 7px; border-radius: 4px; flex: 1;
+      background: var(--moss); opacity: 0.1;
+    }
   </style>
 </head>
 <body>
 
   <div class="slide-container">
 
-    <!-- ==================== SLIDE 1: TITLE ==================== -->
+    <!-- ==================== SLIDE 0: TITLE ==================== -->
     <div class="slide active" data-slide="0">
       <div class="title-slide">
         <div class="title-left title-enter d1">
@@ -334,7 +408,7 @@
         </div>
         <div class="title-right">
           <img src="public/kwanda-brand/kwanda logo tall dark.png" alt="Kwanda" class="logo-tall title-enter d2">
-          <div class="tagline title-enter d3">Your AI transformation partner</div>
+          <div class="tagline title-enter d3">Embarking on your AI journey</div>
         </div>
       </div>
       <div class="title-footer title-enter d4">
@@ -342,10 +416,10 @@
       </div>
     </div>
 
-    <!-- ==================== SLIDE 2: SPEAKERS (dark) ==================== -->
+    <!-- ==================== SLIDE 1: SPEAKERS (dark) ==================== -->
     <div class="slide" data-slide="1">
       <div class="speakers-slide">
-        <h1 class="title-enter d1">How AI can work for you: a practical introduction to <span class="highlight">agentic AI</span>.</h1>
+        <h1 class="title-enter d1">How AI can work for you: a practical introduction to <span class="highlight">AI</span>.</h1>
         <div class="speakers-row title-enter d2">
           <div class="speaker">
             <img src="public/images/Chris.jpeg" alt="Chris Immelman" class="speaker-photo">
@@ -363,131 +437,343 @@
       </div>
     </div>
 
-    <!-- ==================== SLIDE 3: DEMOS HEADER ==================== -->
+    <!-- ==================== SLIDE 2: AI ADOPTION ==================== -->
     <div class="slide" data-slide="2">
       <div class="brand-bar">
         <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
         <span class="url">kwanda.ai</span>
       </div>
-      <div style="height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px;">
-        <div class="slide-subtitle title-enter d1" style="opacity:0;margin-bottom:16px;">Live Demos</div>
-        <h2 class="title-enter d2" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:72px;color:var(--moss);margin-bottom:24px;opacity:0;">Demos</h2>
+      <div class="adoption-slide">
+        <div class="adoption-left">
+          <div class="slide-subtitle" style="opacity:0;">The Opportunity</div>
+          <h2 class="title-enter d1">AI adoption is still <span class="highlight">extremely</span> low.</h2>
+          <p class="title-enter d2">The vast majority of the world has never meaningfully interacted with AI. For businesses willing to move now, the competitive advantage is enormous.</p>
+        </div>
+        <div class="adoption-right title-enter d3">
+          <img src="public/images/ai-adoption.jpeg" alt="AI Adoption Chart">
+        </div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 4: LOGOS IMAGE ==================== -->
+    <!-- ==================== SLIDE 3: CHARACTERS ==================== -->
     <div class="slide" data-slide="3">
       <div class="brand-bar">
         <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
         <span class="url">kwanda.ai</span>
       </div>
-      <div class="image-slide">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
-          <h2 class="slide-heading title-enter d1" style="opacity:0;margin-bottom:0;">Some of our happy clients</h2>
-          <img src="public/images/slide3-logos.png" alt="Logos slide" class="title-enter d2" style="max-height:calc(100vh - 220px);">
+      <div class="flow-slide">
+        <div class="slide-subtitle">Your toolkit</div>
+        <h2 class="slide-heading">Meet the characters</h2>
+        <div class="flow-diagram" style="gap: 48px;">
+
+          <!-- Wispr -->
+          <div class="flow-node">
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img">
+                <rect width="40" height="40" rx="10" fill="#0D1B2A"/>
+                <rect x="15" y="7" width="10" height="15" rx="5" fill="white"/>
+                <path d="M10 19 Q10 27 20 27 Q30 27 30 19" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <line x1="20" y1="27" x2="20" y2="32" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <line x1="14" y1="32" x2="26" y2="32" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="node-label">Wispr</div>
+            <div class="node-desc">Speak your thoughts, instantly transcribed</div>
+          </div>
+
+          <!-- Granola -->
+          <div class="flow-node">
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img">
+                <rect width="40" height="40" rx="10" fill="#1B4332"/>
+                <rect x="12" y="8" width="18" height="24" rx="2" fill="white" opacity="0.92"/>
+                <line x1="16" y1="14" x2="26" y2="14" stroke="#1B4332" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+                <line x1="16" y1="18" x2="26" y2="18" stroke="#1B4332" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+                <line x1="16" y1="22" x2="22" y2="22" stroke="#1B4332" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+                <circle cx="9" cy="13" r="2.5" fill="#52B788"/>
+                <circle cx="9" cy="20" r="2.5" fill="#52B788"/>
+                <circle cx="9" cy="27" r="2.5" fill="#52B788"/>
+              </svg>
+            </div>
+            <div class="node-label">Granola</div>
+            <div class="node-desc">All your meeting notes in one place</div>
+          </div>
+
+          <!-- Email / Gmail -->
+          <div class="flow-node">
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img">
+                <rect x="3" y="8" width="34" height="24" rx="3" fill="#EA4335"/>
+                <path d="M3 11 L20 22 L37 11" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+                <line x1="3" y1="8" x2="3" y2="32" stroke="#C5221F" stroke-width="1"/>
+                <line x1="37" y1="8" x2="37" y2="32" stroke="#C5221F" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="node-label">Email</div>
+            <div class="node-desc">Your inbox, connected</div>
+          </div>
+
+          <!-- AI / Claude -->
+          <div class="flow-node">
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img">
+                <rect width="40" height="40" rx="10" fill="#CC785C"/>
+                <path d="M20 8 L31 32 L26 32 L20 17 L14 32 L9 32 Z" fill="white" opacity="0.92"/>
+                <rect x="13.5" y="23" width="13" height="3.5" rx="1.75" fill="#CC785C"/>
+              </svg>
+            </div>
+            <div class="node-label">AI</div>
+            <div class="node-desc">Your AI model of choice</div>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 5: Xero Invoicing ==================== -->
+    <!-- ==================== SLIDE 4: SECTION 1 — GENERATIVE AI (dark) ==================== -->
     <div class="slide" data-slide="4">
-      <div class="brand-bar">
-        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
-        <span class="url">kwanda.ai</span>
-      </div>
-      <div class="flow-slide">
-        <div class="slide-subtitle">Demo 1 &mdash; Xero Integration</div>
-        <h2 class="slide-heading">Automated Financial Data Sync</h2>
-        <div class="flow-diagram">
-          <div class="flow-node">
-            <div class="node-step">01</div>
-            <div class="node-icon agent-icon">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M15 3l2 2-2 2" opacity="0.5"/></svg>
-            </div>
-            <div class="node-label">Instruction</div>
-            <div class="node-desc">"Create invoice for [Client]"</div>
-          </div>
-          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
-          <div class="flow-node">
-            <div class="node-step">02</div>
-            <div class="node-icon service-icon">
-              <svg viewBox="0 0 40 40" class="service-logo-img"><circle cx="20" cy="20" r="18" fill="#13B5EA"/><text x="20" y="27" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans,sans-serif" font-weight="800" font-size="20">X</text></svg>
-            </div>
-            <div class="node-label">Contact Lookup</div>
-            <div class="node-desc">Search Xero contacts</div>
-          </div>
-          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
-          <div class="flow-node">
-            <div class="node-step">03</div>
-            <div class="node-icon action-icon" style="font-size:34px;">📄</div>
-            <div class="node-label">Drafting</div>
-            <div class="node-desc">Generate invoice in Xero</div>
-          </div>
-          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
-          <div class="flow-node">
-            <div class="node-step">04</div>
-            <div class="node-icon success-icon" style="font-size:34px;">&#x2713;</div>
-            <div class="node-label">Complete</div>
-            <div class="node-desc">Invoice synced &amp; ready</div>
-          </div>
+      <div class="section-slide-dark">
+        <div class="section-num title-enter d1">Section 01</div>
+        <h1 class="title-enter d2">Generative AI</h1>
+        <ul class="section-bullets title-enter d3">
+          <li><span class="bullet-dash">—</span>Prompt-and-response use of an AI model</li>
+          <li><span class="bullet-dash">—</span>ChatGPT versus Perplexity for web search</li>
+        </ul>
+        <div class="title-enter d4" style="position:absolute;bottom:52px;left:0;right:0;text-align:center;font-size:15px;color:var(--cream);opacity:0.3;">
+          <a href="https://kwanda.ai" style="color:var(--clay);text-decoration:none;font-weight:600;">kwanda.ai</a> &nbsp;// &nbsp;An Ubundi-backed company
         </div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 6: CRM Management ==================== -->
+    <!-- ==================== SLIDE 5: SECTION 2 — ACTION TAKING AI (dark) ==================== -->
     <div class="slide" data-slide="5">
-      <div class="brand-bar">
-        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
-        <span class="url">kwanda.ai</span>
-      </div>
-      <div class="flow-slide">
-        <div class="slide-subtitle">Demo 2 &mdash; CRM Automation</div>
-        <h2 class="slide-heading">Intelligent Lead Pipeline Management</h2>
-        <div class="flow-diagram">
-          <div class="flow-node">
-            <div class="node-step">01</div>
-            <div class="node-icon action-icon" style="font-size:34px;">📥</div>
-            <div class="node-label">Inbound</div>
-            <div class="node-desc">Lead detected from email</div>
-          </div>
-          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
-          <div class="flow-node">
-            <div class="node-step">02</div>
-            <div class="node-icon agent-icon">
-              <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h-2V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 12h2m2 0h2"/><circle cx="9" cy="15" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="1" fill="currentColor" stroke="none"/></svg>
-            </div>
-            <div class="node-label">Extraction</div>
-            <div class="node-desc">Parse name, company &amp; budget</div>
-          </div>
-          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
-          <div class="flow-node">
-            <div class="node-step">03</div>
-            <div class="node-icon service-icon">
-              <svg viewBox="0 0 40 40" class="service-logo-img"><rect x="4" y="4" width="32" height="32" rx="4" fill="#0F9D58"/><rect x="10" y="12" width="20" height="18" rx="1" fill="white"/><line x1="20" y1="12" x2="20" y2="30" stroke="#0F9D58" stroke-width="1.2"/><line x1="10" y1="19" x2="30" y2="19" stroke="#0F9D58" stroke-width="1.2"/><line x1="10" y1="25" x2="30" y2="25" stroke="#0F9D58" stroke-width="1.2"/></svg>
-            </div>
-            <div class="node-label">Database Update</div>
-            <div class="node-desc">Write to Google Sheets</div>
-          </div>
-          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
-          <div class="flow-node">
-            <div class="node-step">04</div>
-            <div class="node-icon action-icon" style="font-size:34px;">💬</div>
-            <div class="node-label">Confirmation</div>
-            <div class="node-desc">Notify via Slack / Telegram</div>
-          </div>
+      <div class="section-slide-dark">
+        <div class="section-num title-enter d1">Section 02</div>
+        <h1 class="title-enter d2">Action Taking AI</h1>
+        <p class="section-desc title-enter d3">Your AI makes use of tools to complete your query</p>
+        <div class="title-enter d4" style="position:absolute;bottom:52px;left:0;right:0;text-align:center;font-size:15px;color:var(--cream);opacity:0.3;">
+          <a href="https://kwanda.ai" style="color:var(--clay);text-decoration:none;font-weight:600;">kwanda.ai</a> &nbsp;// &nbsp;An Ubundi-backed company
         </div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 7: SOW & Document Gen ==================== -->
+    <!-- ==================== SLIDE 6: ACTION TAKING AI DEMO (two rows) ==================== -->
     <div class="slide" data-slide="6">
       <div class="brand-bar">
         <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
         <span class="url">kwanda.ai</span>
       </div>
       <div class="flow-slide">
-        <div class="slide-subtitle">Demo 3 &mdash; Document Generation</div>
-        <h2 class="slide-heading">Instant Legal Document Creation</h2>
+        <div class="slide-subtitle">Demo &mdash; Action Taking AI</div>
+        <h2 class="slide-heading" style="margin-bottom: 36px;">Equipping AI with tools</h2>
+
+        <div class="demo-rows">
+
+          <!-- Row 1: Gemini, no tools -->
+          <div class="demo-row title-enter d3">
+            <div class="demo-row-label">No tools</div>
+            <div class="flow-diagram">
+              <div class="flow-node">
+                <div class="node-step">01</div>
+                <div class="node-icon service-icon">
+                  <svg viewBox="0 0 40 40" class="service-logo-img">
+                    <rect width="40" height="40" rx="10" fill="#1A73E8"/>
+                    <path d="M20 7 L22.5 17.5 L33 20 L22.5 22.5 L20 33 L17.5 22.5 L7 20 L17.5 17.5 Z" fill="white" opacity="0.92"/>
+                  </svg>
+                </div>
+                <div class="node-label">Gemini</div>
+                <div class="node-desc">"List my recent emails"</div>
+              </div>
+              <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+              <div class="flow-node">
+                <div class="node-step">02</div>
+                <div class="node-icon no-result-icon">
+                  <svg viewBox="0 0 24 24" style="width:28px;height:28px;">
+                    <circle cx="12" cy="12" r="8.5" stroke="rgba(239,68,68,0.3)" stroke-width="1.5" fill="none"/>
+                    <line x1="9" y1="9" x2="15" y2="15" stroke="rgba(239,68,68,0.35)" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="15" y1="9" x2="9" y2="15" stroke="rgba(239,68,68,0.35)" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="node-label">No results</div>
+                <div class="node-desc">No access to emails</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: Claude + Gmail -->
+          <div class="demo-row title-enter d4">
+            <div class="demo-row-label">With tools</div>
+            <div class="flow-diagram">
+              <div class="flow-node">
+                <div class="node-step">01</div>
+                <div class="node-icon service-icon">
+                  <svg viewBox="0 0 40 40" class="service-logo-img">
+                    <rect width="40" height="40" rx="10" fill="#CC785C"/>
+                    <path d="M20 8 L31 32 L26 32 L20 17 L14 32 L9 32 Z" fill="white" opacity="0.92"/>
+                    <rect x="13.5" y="23" width="13" height="3.5" rx="1.75" fill="#CC785C"/>
+                  </svg>
+                </div>
+                <div class="node-label">Claude</div>
+                <div class="node-desc">"List my recent emails"</div>
+              </div>
+              <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+              <div class="flow-node">
+                <div class="node-step">02</div>
+                <div class="node-icon service-icon">
+                  <svg viewBox="0 0 40 40" class="service-logo-img">
+                    <rect x="3" y="8" width="34" height="24" rx="3" fill="#EA4335"/>
+                    <path d="M3 11 L20 22 L37 11" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="3" y1="8" x2="3" y2="32" stroke="#C5221F" stroke-width="1"/>
+                    <line x1="37" y1="8" x2="37" y2="32" stroke="#C5221F" stroke-width="1"/>
+                  </svg>
+                </div>
+                <div class="node-label">Gmail</div>
+                <div class="node-desc">Connected tool</div>
+              </div>
+              <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+              <div class="flow-node">
+                <div class="node-step">03</div>
+                <div class="email-result-card">
+                  <div class="email-row"><div class="email-dot"></div><div class="email-line"></div></div>
+                  <div class="email-row"><div class="email-dot"></div><div class="email-line"></div></div>
+                  <div class="email-row"><div class="email-dot"></div><div class="email-line"></div></div>
+                </div>
+                <div class="node-label">3 emails listed</div>
+                <div class="node-desc">Results returned</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SLIDE 7: SECTION 3 — AGENTIC AI (light) ==================== -->
+    <div class="slide" data-slide="7">
+      <div class="brand-bar">
+        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
+        <span class="url">kwanda.ai</span>
+      </div>
+      <div style="height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px;text-align:center;">
+        <div class="title-enter d1" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--clay);font-weight:600;margin-bottom:16px;opacity:0;">Section 03</div>
+        <h2 class="title-enter d2" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:80px;color:var(--moss);opacity:0;line-height:1.05;">Agentic AI</h2>
+      </div>
+    </div>
+
+    <!-- ==================== SLIDE 8: DEMO — CREATE CLIENT PROPOSALS ==================== -->
+    <div class="slide" data-slide="8">
+      <div class="brand-bar">
+        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
+        <span class="url">kwanda.ai</span>
+      </div>
+      <div class="flow-slide">
+        <div class="slide-subtitle">Demo &mdash; Agentic AI</div>
+        <h2 class="slide-heading">Creating a Client Proposal</h2>
+        <div class="flow-diagram">
+
+          <!-- Step 1: AI Agent (Claude) -->
+          <div class="flow-node">
+            <div class="node-step">01</div>
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img">
+                <rect width="40" height="40" rx="10" fill="#CC785C"/>
+                <path d="M20 8 L31 32 L26 32 L20 17 L14 32 L9 32 Z" fill="white" opacity="0.92"/>
+                <rect x="13.5" y="23" width="13" height="3.5" rx="1.75" fill="#CC785C"/>
+              </svg>
+            </div>
+            <div class="node-label">AI Agent</div>
+            <div class="node-desc">Kick off proposal workflow</div>
+          </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+
+          <!-- Step 2: Granola (meeting notes) -->
+          <div class="flow-node">
+            <div class="node-step">02</div>
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img">
+                <rect width="40" height="40" rx="10" fill="#1B4332"/>
+                <rect x="12" y="8" width="18" height="24" rx="2" fill="white" opacity="0.92"/>
+                <line x1="16" y1="14" x2="26" y2="14" stroke="#1B4332" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+                <line x1="16" y1="18" x2="26" y2="18" stroke="#1B4332" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+                <line x1="16" y1="22" x2="22" y2="22" stroke="#1B4332" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+                <circle cx="9" cy="13" r="2.5" fill="#52B788"/>
+                <circle cx="9" cy="20" r="2.5" fill="#52B788"/>
+                <circle cx="9" cy="27" r="2.5" fill="#52B788"/>
+              </svg>
+            </div>
+            <div class="node-label">Read Meeting Notes</div>
+            <div class="node-desc">Fetch context from Granola</div>
+          </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+
+          <!-- Step 3: Gmail (read emails) -->
+          <div class="flow-node">
+            <div class="node-step">03</div>
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img">
+                <rect x="3" y="8" width="34" height="24" rx="3" fill="#EA4335"/>
+                <path d="M3 11 L20 22 L37 11" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+                <line x1="3" y1="8" x2="3" y2="32" stroke="#C5221F" stroke-width="1"/>
+                <line x1="37" y1="8" x2="37" y2="32" stroke="#C5221F" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="node-label">Read Emails</div>
+            <div class="node-desc">Pull thread history from Gmail</div>
+          </div>
+          <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
+
+          <!-- Step 4: Draft Proposal (document) -->
+          <div class="flow-node">
+            <div class="node-step">04</div>
+            <div class="node-icon service-icon">
+              <svg viewBox="0 0 40 40" class="service-logo-img">
+                <rect x="6" y="3" width="22" height="28" rx="2.5" fill="#E8F5E9" stroke="#43A047" stroke-width="1.5"/>
+                <path d="M21 3 L28 10" fill="none" stroke="#43A047" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="21" y="3" width="7" height="7" rx="1.5" fill="#C8E6C9" stroke="#43A047" stroke-width="1.5"/>
+                <line x1="10" y1="16" x2="24" y2="16" stroke="#43A047" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                <line x1="10" y1="20" x2="24" y2="20" stroke="#43A047" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                <line x1="10" y1="24" x2="18" y2="24" stroke="#43A047" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                <circle cx="30" cy="30" r="7" fill="#43A047"/>
+                <path d="M27 30 L29 32.5 L33 27.5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="node-label">Draft Proposal</div>
+            <div class="node-desc">Proposal generated &amp; ready</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SLIDE 9: WHAT ARE SKILLS? ==================== -->
+    <div class="slide" data-slide="9">
+      <div class="brand-bar">
+        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
+        <span class="url">kwanda.ai</span>
+      </div>
+      <div style="height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 100px;text-align:center;">
+        <div class="slide-subtitle" style="margin-bottom:16px;">Section 3 &mdash; Agentic AI</div>
+        <h2 class="slide-heading" style="margin-bottom:40px;">What are skills?</h2>
+        <p class="title-enter d3" style="font-size:22px;max-width:740px;color:var(--moss);opacity:0.6;line-height:1.75;font-family:'Plus Jakarta Sans',sans-serif;">
+          Pre-built natural language instructions or recipes to carry out complex workflows
+        </p>
+        <div class="title-enter d4" style="display:flex;gap:12px;margin-top:40px;flex-wrap:wrap;justify-content:center;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;padding:9px 18px;border-radius:8px;background:var(--moss);color:var(--cream);opacity:0.85;">/create-proposal</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;padding:9px 18px;border-radius:8px;background:var(--moss);color:var(--cream);opacity:0.85;">/onboard-client</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;padding:9px 18px;border-radius:8px;background:var(--moss);color:var(--cream);opacity:0.85;">/invoice-from-whatsapp</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SLIDE 10: DEMO — CREATING ONBOARDING LEGALS ==================== -->
+    <div class="slide" data-slide="10">
+      <div class="brand-bar">
+        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
+        <span class="url">kwanda.ai</span>
+      </div>
+      <div class="flow-slide">
+        <div class="slide-subtitle">Demo &mdash; Agentic AI</div>
+        <h2 class="slide-heading">Creating Onboarding Legals</h2>
         <div class="flow-diagram">
           <div class="flow-node">
             <div class="node-step">01</div>
@@ -519,7 +805,12 @@
           <div class="flow-node">
             <div class="node-step">04</div>
             <div class="node-icon service-icon">
-              <svg viewBox="0 0 40 40" class="service-logo-img"><rect x="4" y="9" width="32" height="23" rx="3" fill="#EA4335"/><path d="M4 12l16 10 16-10" fill="none" stroke="white" stroke-width="2"/><rect x="4" y="9" width="32" height="4" rx="2" fill="#D93025"/></svg>
+              <svg viewBox="0 0 40 40" class="service-logo-img">
+                <rect x="3" y="8" width="34" height="24" rx="3" fill="#EA4335"/>
+                <path d="M3 11 L20 22 L37 11" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+                <line x1="3" y1="8" x2="3" y2="32" stroke="#C5221F" stroke-width="1"/>
+                <line x1="37" y1="8" x2="37" y2="32" stroke="#C5221F" stroke-width="1"/>
+              </svg>
             </div>
             <div class="node-label">Email Draft</div>
             <div class="node-desc">Gmail draft with attachment</div>
@@ -528,73 +819,57 @@
       </div>
     </div>
 
-    <!-- ==================== SLIDE 8: Calendar & Meeting ==================== -->
-    <div class="slide" data-slide="7">
+    <!-- ==================== SLIDE 11: DEMO — CREATING INVOICES FROM WHATSAPP ==================== -->
+    <div class="slide" data-slide="11">
       <div class="brand-bar">
         <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
         <span class="url">kwanda.ai</span>
       </div>
       <div class="flow-slide">
-        <div class="slide-subtitle">Demo 4 &mdash; Calendar Integration</div>
-        <h2 class="slide-heading">Seamless Meeting Coordination</h2>
+        <div class="slide-subtitle">Demo &mdash; Agentic AI</div>
+        <h2 class="slide-heading">Invoicing via WhatsApp</h2>
         <div class="flow-diagram">
           <div class="flow-node">
             <div class="node-step">01</div>
             <div class="node-icon service-icon">
-              <svg viewBox="0 0 40 40" class="service-logo-img"><rect x="6" y="8" width="28" height="28" rx="4" fill="#4285F4"/><rect x="10" y="15" width="20" height="17" rx="1" fill="white"/><rect x="13" y="4" width="3" height="8" rx="1.5" fill="#4285F4"/><rect x="24" y="4" width="3" height="8" rx="1.5" fill="#4285F4"/><rect x="14" y="20" width="4" height="3" rx="0.5" fill="#4285F4" opacity="0.7"/><rect x="22" y="20" width="4" height="3" rx="0.5" fill="#EA4335" opacity="0.7"/><rect x="14" y="26" width="4" height="3" rx="0.5" fill="#0F9D58" opacity="0.7"/><rect x="22" y="26" width="4" height="3" rx="0.5" fill="#FBBC04" opacity="0.7"/></svg>
+              <svg viewBox="0 0 40 40" class="service-logo-img">
+                <rect width="40" height="40" rx="10" fill="#25D366"/>
+                <path d="M20 7C12.8 7 7 12.8 7 20c0 2.3.6 4.5 1.8 6.4L7 33l6.8-1.8c1.8 1 3.9 1.6 6.2 1.6 7.2 0 13-5.8 13-13S27.2 7 20 7z" fill="white" opacity="0.92"/>
+                <path d="M16.2 13.8c-.3-.7-.6-.7-.9-.7-.2 0-.5 0-.7 0-.2 0-.6.1-1 .5-.3.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.8c.2.2 2.6 4.2 6.5 5.7 3.2 1.3 3.8 1 4.5 1 .7 0 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.1-.4-.2-.9-.5-.4-.2-2.2-1.1-2.5-1.2-.3-.1-.5-.1-.8.2-.3.3-1 1.1-1.2 1.4-.2.2-.4.3-.8.1-.4-.2-1.8-.7-3.4-2.1-.6-.5-1-1.2-1.1-1.5-.1-.3 0-.5.2-.7.1-.1.4-.5.6-.7.1-.2.2-.3.2-.5 0-.2 0-.4-.1-.5z" fill="#25D366"/>
+              </svg>
             </div>
-            <div class="node-label">Availability Check</div>
-            <div class="node-desc">Scan calendar for free slots</div>
+            <div class="node-label">WhatsApp</div>
+            <div class="node-desc">Message received from client</div>
           </div>
           <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
           <div class="flow-node">
             <div class="node-step">02</div>
             <div class="node-icon service-icon">
-              <svg viewBox="0 0 40 40" class="service-logo-img"><circle cx="20" cy="20" r="17" fill="#4285F4"/><circle cx="20" cy="15" r="5" fill="white"/><path d="M10.5 31a10 10 0 0 1 19 0" fill="white"/></svg>
+              <svg viewBox="0 0 40 40" class="service-logo-img"><circle cx="20" cy="20" r="18" fill="#13B5EA"/><text x="20" y="27" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans,sans-serif" font-weight="800" font-size="20">X</text></svg>
             </div>
-            <div class="node-label">Contact Retrieval</div>
-            <div class="node-desc">Find participant email</div>
+            <div class="node-label">Contact Lookup</div>
+            <div class="node-desc">Search Xero contacts</div>
           </div>
           <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
           <div class="flow-node">
             <div class="node-step">03</div>
-            <div class="node-icon agent-icon">
-              <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h-2V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 12h2m2 0h2"/><circle cx="9" cy="15" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="1" fill="currentColor" stroke="none"/></svg>
-            </div>
-            <div class="node-label">Scheduling</div>
-            <div class="node-desc">Create event + Meet link</div>
+            <div class="node-icon action-icon" style="font-size:34px;">📄</div>
+            <div class="node-label">Drafting</div>
+            <div class="node-desc">Generate invoice in Xero</div>
           </div>
           <div class="flow-connector"><div class="connector-line"><div class="travel-dot"></div></div></div>
           <div class="flow-node">
             <div class="node-step">04</div>
-            <div class="node-icon action-icon" style="font-size:34px;">📤</div>
-            <div class="node-label">Invitation</div>
-            <div class="node-desc">Invites dispatched to all</div>
+            <div class="node-icon success-icon" style="font-size:34px;">&#x2713;</div>
+            <div class="node-label">Complete</div>
+            <div class="node-desc">Invoice synced &amp; ready</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 9: AI ADOPTION ==================== -->
-    <div class="slide" data-slide="8">
-      <div class="brand-bar">
-        <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
-        <span class="url">kwanda.ai</span>
-      </div>
-      <div class="adoption-slide">
-        <div class="adoption-left">
-          <div class="slide-subtitle" style="opacity:0;">The Opportunity</div>
-          <h2 class="title-enter d1">AI adoption is still <span class="highlight">extremely</span> low.</h2>
-          <p class="title-enter d2">The vast majority of the world has never meaningfully interacted with AI. For businesses willing to move now, the competitive advantage is enormous.</p>
-        </div>
-        <div class="adoption-right title-enter d3">
-          <img src="public/images/ai-adoption.jpeg" alt="AI Adoption Chart">
-        </div>
-      </div>
-    </div>
-
-    <!-- ==================== SLIDE 10: THANK YOU / QR ==================== -->
-    <div class="slide" data-slide="9">
+    <!-- ==================== SLIDE 12: THANK YOU / QR ==================== -->
+    <div class="slide" data-slide="12">
       <div class="brand-bar">
         <img src="public/kwanda-brand/kwanda logo full dark.png" alt="Kwanda">
         <span class="url">kwanda.ai</span>
@@ -602,7 +877,7 @@
       <div class="adoption-slide">
         <div class="adoption-left">
           <h2 class="title-enter d1">Thank you.</h2>
-          <p class="title-enter d2">Scan the QR to start your agentic journey.</p>
+          <p class="title-enter d2">Scan the QR to start your AI journey.</p>
         </div>
         <div class="adoption-right title-enter d3">
           <img src="public/images/qr-code.png" alt="QR Code" style="max-height:420px;">
@@ -624,6 +899,9 @@
     <div class="dot" data-goto="7"></div>
     <div class="dot" data-goto="8"></div>
     <div class="dot" data-goto="9"></div>
+    <div class="dot" data-goto="10"></div>
+    <div class="dot" data-goto="11"></div>
+    <div class="dot" data-goto="12"></div>
   </div>
 
   <script>
@@ -640,77 +918,29 @@
       const CREAM = '#F2F0E9';
       const SALMON = '#D4836B';
 
-      // Isometric helpers
       function isoX(x, y) { return CX + (x - y) * 0.866 * 32; }
       function isoY(x, y, z) { return CY + (x + y) * 0.5 * 32 - z * 32; }
 
-      // Cube drawer (isometric)
-      function drawCube(x, y, z, size, topColor, leftColor, rightColor, alpha) {
-        const s = size;
-        const px = isoX(x, y);
-        const py = isoY(x, y, z);
-        ctx.globalAlpha = alpha;
-
-        // Top face
-        ctx.beginPath();
-        ctx.moveTo(px, py - s);
-        ctx.lineTo(px + s * 0.866, py - s * 0.5);
-        ctx.lineTo(px, py);
-        ctx.lineTo(px - s * 0.866, py - s * 0.5);
-        ctx.closePath();
-        ctx.fillStyle = topColor;
-        ctx.fill();
-
-        // Left face
-        ctx.beginPath();
-        ctx.moveTo(px - s * 0.866, py - s * 0.5);
-        ctx.lineTo(px, py);
-        ctx.lineTo(px, py + s);
-        ctx.lineTo(px - s * 0.866, py + s * 0.5);
-        ctx.closePath();
-        ctx.fillStyle = leftColor;
-        ctx.fill();
-
-        // Right face
-        ctx.beginPath();
-        ctx.moveTo(px + s * 0.866, py - s * 0.5);
-        ctx.lineTo(px, py);
-        ctx.lineTo(px, py + s);
-        ctx.lineTo(px + s * 0.866, py + s * 0.5);
-        ctx.closePath();
-        ctx.fillStyle = rightColor;
-        ctx.fill();
-
-        ctx.globalAlpha = 1;
-      }
-
-      // Cubes definition: [gridX, gridY, gridZ, size, colorSet, floatSpeed, floatPhase]
-      // colorSet: 0=moss, 1=clay, 2=teal, 3=gold
       const colorSets = [
-        ['#4a6b56', '#2E4036', '#3a5545'],   // moss
-        ['#d4734e', '#CC5833', '#b84a2a'],    // clay/salmon
-        ['#3a7070', '#2E5A5A', '#245050'],    // teal
-        ['#d4b678', '#C4A265', '#a88b50'],    // gold
+        ['#4a6b56', '#2E4036', '#3a5545'],
+        ['#d4734e', '#CC5833', '#b84a2a'],
+        ['#3a7070', '#2E5A5A', '#245050'],
+        ['#d4b678', '#C4A265', '#a88b50'],
       ];
 
       const cubes = [
-        // Central cluster - large cubes
-        [0, 0, 2, 42, 3, 0.8, 0],      // gold center (hero)
-        [-1.2, 0, 1, 38, 2, 0.6, 1],    // teal left
-        [1.2, 0, 1, 38, 2, 0.7, 2],     // teal right
-        [0, -1.2, 1, 38, 2, 0.5, 0.5],  // teal back
-        [0, 1.2, 0.5, 35, 2, 0.6, 1.5], // teal front
-
-        // Second ring - medium cubes
-        [-2, -1, 1.5, 28, 1, 0.9, 0.3],  // salmon
-        [2, -1, 1.5, 28, 2, 0.7, 1.2],   // teal
-        [-1, -2, 1, 26, 2, 0.8, 0.8],    // teal
-        [1, -2, 1.5, 30, 1, 0.6, 2],     // salmon
-        [-2, 1, 0.5, 28, 1, 0.7, 1.7],   // salmon
-        [2, 1, 0.5, 26, 2, 0.8, 0.4],    // teal
-        [0, -2, 2, 24, 1, 0.9, 1],       // salmon
-
-        // Third ring - smaller cubes
+        [0, 0, 2, 42, 3, 0.8, 0],
+        [-1.2, 0, 1, 38, 2, 0.6, 1],
+        [1.2, 0, 1, 38, 2, 0.7, 2],
+        [0, -1.2, 1, 38, 2, 0.5, 0.5],
+        [0, 1.2, 0.5, 35, 2, 0.6, 1.5],
+        [-2, -1, 1.5, 28, 1, 0.9, 0.3],
+        [2, -1, 1.5, 28, 2, 0.7, 1.2],
+        [-1, -2, 1, 26, 2, 0.8, 0.8],
+        [1, -2, 1.5, 30, 1, 0.6, 2],
+        [-2, 1, 0.5, 28, 1, 0.7, 1.7],
+        [2, 1, 0.5, 26, 2, 0.8, 0.4],
+        [0, -2, 2, 24, 1, 0.9, 1],
         [-3, 0, 1, 22, 2, 1.0, 0.6],
         [3, 0, 0.5, 20, 1, 0.8, 1.8],
         [-2, -2, 0.5, 18, 1, 0.9, 0.2],
@@ -720,8 +950,6 @@
         [0, 2.5, 0, 16, 1, 1.0, 1.6],
         [-3, -1, 0.5, 16, 2, 0.7, 0.4],
         [3, -1, 0.5, 16, 1, 0.8, 1.1],
-
-        // Outer small cubes
         [-4, 0.5, 0, 14, 1, 1.1, 0.7],
         [4, -0.5, 0, 12, 2, 1.0, 1.3],
         [-3, 2, 0, 12, 2, 0.9, 2.3],
@@ -732,32 +960,21 @@
         [4, -2, 0, 10, 2, 1.0, 2.2],
       ];
 
-      // Pipes: [startX, startY, controlPoints..., endX, endY, color, width, speed]
       const pipes = [
-        // Left extending pipes
         {pts: [{x:-180,y:-20},{x:-220,y:-60},{x:-280,y:-60},{x:-320,y:-20},{x:-320,y:40},{x:-280,y:80}], color: CLAY, w: 2.5, speed: 1.2},
         {pts: [{x:-160,y:60},{x:-200,y:100},{x:-260,y:120},{x:-300,y:100},{x:-340,y:60}], color: TEAL, w: 2, speed: 0.9},
         {pts: [{x:-140,y:-80},{x:-180,y:-120},{x:-240,y:-140},{x:-300,y:-120}], color: GOLD, w: 1.8, speed: 1.5},
-
-        // Right extending pipes
         {pts: [{x:180,y:-20},{x:220,y:-60},{x:280,y:-80},{x:340,y:-40},{x:360,y:20}], color: TEAL, w: 2.5, speed: 1.0},
         {pts: [{x:160,y:60},{x:200,y:100},{x:260,y:80},{x:320,y:100},{x:360,y:80}], color: CLAY, w: 2, speed: 1.3},
         {pts: [{x:140,y:-80},{x:200,y:-130},{x:280,y:-150},{x:340,y:-120}], color: GOLD, w: 1.8, speed: 0.8},
-
-        // Top pipes
         {pts: [{x:-60,y:-140},{x:-80,y:-200},{x:-40,y:-260},{x:20,y:-280}], color: CLAY, w: 2, speed: 1.1},
         {pts: [{x:60,y:-140},{x:80,y:-200},{x:120,y:-240},{x:160,y:-220}], color: TEAL, w: 2, speed: 1.4},
-
-        // Bottom pipes
         {pts: [{x:-60,y:120},{x:-100,y:180},{x:-80,y:240},{x:-120,y:280}], color: TEAL, w: 2, speed: 0.7},
         {pts: [{x:60,y:120},{x:100,y:180},{x:140,y:220},{x:120,y:270}], color: CLAY, w: 1.8, speed: 1.2},
-
-        // Diagonal pipes
         {pts: [{x:-120,y:-100},{x:-180,y:-160},{x:-220,y:-220}], color: TEAL, w: 1.5, speed: 1.6},
         {pts: [{x:120,y:-100},{x:180,y:-160},{x:220,y:-220}], color: CLAY, w: 1.5, speed: 0.9},
       ];
 
-      // Endpoint nodes (dots at pipe ends)
       const endNodes = [
         {x:-280,y:80,r:6,color:CLAY}, {x:-340,y:60,r:5,color:TEAL}, {x:-300,y:-120,r:5,color:GOLD},
         {x:360,y:20,r:6,color:TEAL}, {x:360,y:80,r:5,color:CLAY}, {x:340,y:-120,r:5,color:GOLD},
@@ -766,7 +983,6 @@
         {x:-220,y:-220,r:4,color:TEAL}, {x:220,y:-220,r:4,color:CLAY},
       ];
 
-      // Data particles traveling along pipes
       class Particle {
         constructor(pipe, offset) {
           this.pipe = pipe;
@@ -797,7 +1013,6 @@
         }
       });
 
-      // Glow spots (soft white glows)
       const glows = [
         {x: -120, y: -100, r: 60, phase: 0},
         {x: 140, y: -80, r: 50, phase: 1.5},
@@ -811,7 +1026,6 @@
         time += 0.016;
         ctx.clearRect(0, 0, W, H);
 
-        // Draw soft glows behind everything
         glows.forEach(g => {
           const alpha = 0.12 + Math.sin(time * 0.8 + g.phase) * 0.06;
           const grad = ctx.createRadialGradient(CX + g.x, CY + g.y, 0, CX + g.x, CY + g.y, g.r);
@@ -821,12 +1035,10 @@
           ctx.fillRect(CX + g.x - g.r, CY + g.y - g.r, g.r * 2, g.r * 2);
         });
 
-        // Draw pipes
         pipes.forEach(pipe => {
           ctx.beginPath();
           ctx.moveTo(CX + pipe.pts[0].x, CY + pipe.pts[0].y);
           for (let i = 1; i < pipe.pts.length; i++) {
-            // Smooth curve through points
             if (i < pipe.pts.length - 1) {
               const midX = (pipe.pts[i].x + pipe.pts[i+1].x) / 2;
               const midY = (pipe.pts[i].y + pipe.pts[i+1].y) / 2;
@@ -844,19 +1056,14 @@
           ctx.globalAlpha = 1;
         });
 
-        // Draw end nodes with pulse
         endNodes.forEach((n, i) => {
           const pulse = 1 + Math.sin(time * 2 + i * 0.7) * 0.3;
           const r = n.r * pulse;
-
-          // Glow
           ctx.globalAlpha = 0.15 + Math.sin(time * 2 + i) * 0.1;
           ctx.beginPath();
           ctx.arc(CX + n.x, CY + n.y, r * 2.5, 0, Math.PI * 2);
           ctx.fillStyle = n.color;
           ctx.fill();
-
-          // Solid dot
           ctx.globalAlpha = 0.7;
           ctx.beginPath();
           ctx.arc(CX + n.x, CY + n.y, r, 0, Math.PI * 2);
@@ -865,10 +1072,7 @@
           ctx.globalAlpha = 1;
         });
 
-        // Draw cubes (sorted back-to-front)
-        const sortedCubes = [...cubes].sort((a, b) => {
-          return (a[0] + a[1]) - (b[0] + b[1]);
-        });
+        const sortedCubes = [...cubes].sort((a, b) => (a[0] + a[1]) - (b[0] + b[1]));
 
         sortedCubes.forEach(c => {
           const [gx, gy, gz, size, colorIdx, floatSpd, floatPhase] = c;
@@ -881,7 +1085,6 @@
 
           ctx.globalAlpha = alpha;
 
-          // Right face (darkest)
           ctx.beginPath();
           ctx.moveTo(px + s * 0.866, py - s * 0.5);
           ctx.lineTo(px, py);
@@ -891,7 +1094,6 @@
           ctx.fillStyle = cs[2];
           ctx.fill();
 
-          // Left face
           ctx.beginPath();
           ctx.moveTo(px - s * 0.866, py - s * 0.5);
           ctx.lineTo(px, py);
@@ -901,7 +1103,6 @@
           ctx.fillStyle = cs[1];
           ctx.fill();
 
-          // Top face (lightest)
           ctx.beginPath();
           ctx.moveTo(px, py - s);
           ctx.lineTo(px + s * 0.866, py - s * 0.5);
@@ -911,7 +1112,6 @@
           ctx.fillStyle = cs[0];
           ctx.fill();
 
-          // Subtle edge highlight
           ctx.globalAlpha = alpha * 0.15;
           ctx.beginPath();
           ctx.moveTo(px, py - s);
@@ -923,7 +1123,6 @@
           ctx.globalAlpha = 1;
         });
 
-        // Draw data particles
         particles.forEach(p => {
           p.update();
           const pos = p.getPos();
@@ -932,7 +1131,6 @@
           glow.addColorStop(1, p.pipe.color + '00');
           ctx.fillStyle = glow;
           ctx.fillRect(pos.x - 8, pos.y - 8, 16, 16);
-
           ctx.beginPath();
           ctx.arc(pos.x, pos.y, 3, 0, Math.PI * 2);
           ctx.fillStyle = p.pipe.color;
@@ -958,7 +1156,6 @@
       function goTo(index) {
         if (index === current || index < 0 || index >= slides.length) return;
 
-        // Clean up any in-progress transitions immediately
         pendingCleanups.forEach(fn => fn());
         pendingCleanups = [];
 
@@ -966,19 +1163,16 @@
         const oldSlide = slides[current];
         const newSlide = slides[index];
 
-        // Immediately hide old slide
         oldSlide.classList.remove('active', 'exit-left');
         oldSlide.style.transform = '';
         oldSlide.style.opacity = '0';
         oldSlide.style.transition = 'none';
 
-        // Set up new slide entry
         newSlide.style.transition = 'none';
         newSlide.style.transform = direction > 0 ? 'translateX(60px)' : 'translateX(-60px)';
         newSlide.style.opacity = '0';
-        newSlide.offsetHeight; // reflow
+        newSlide.offsetHeight;
 
-        // Animate in
         newSlide.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
         newSlide.style.transform = '';
         newSlide.style.opacity = '';
@@ -988,7 +1182,6 @@
         dots[index].classList.add('active');
         current = index;
 
-        // Schedule cleanup (non-blocking)
         const cleanup = () => {
           oldSlide.style.transition = '';
           oldSlide.style.opacity = '';
